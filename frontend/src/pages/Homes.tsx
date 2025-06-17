@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css'; // Assuming you will create a CSS file for styling
 
-const Home = () => {
+export const Home = () => {
     return (
         <div className="home-container">
             <header className="home-header">
@@ -22,5 +22,3 @@ const Home = () => {
         </div>
     );
 };
-
-export default Home;

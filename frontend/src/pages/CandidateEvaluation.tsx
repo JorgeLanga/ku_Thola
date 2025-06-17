@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-const CandidateEvaluation = () => {
+export const CandidateEvaluation = () => {
     const [technicalEvaluation, setTechnicalEvaluation] = useState('');
     const [behavioralEvaluation, setBehavioralEvaluation] = useState('');
     const [generalNotes, setGeneralNotes] = useState('');
     const [status, setStatus] = useState('Aprovado');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         // Logic to save the evaluation data
         console.log({
@@ -56,5 +56,3 @@ const CandidateEvaluation = () => {
         </div>
     );
 };
-
-export default CandidateEvaluation;

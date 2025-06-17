@@ -6,7 +6,7 @@ interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline';
 }
 
-const Button: React.FC<ButtonProps> = ({ text, onClick, variant = 'primary' }) => {
+export const Button: React.FC<ButtonProps> = ({ text, onClick, variant = 'primary' }) => {
   const baseStyle = 'py-2 px-4 rounded focus:outline-none focus:ring';
   const variantStyles = {
     primary: 'bg-blue-600 text-white hover:bg-blue-700',
@@ -21,4 +21,3 @@ const Button: React.FC<ButtonProps> = ({ text, onClick, variant = 'primary' }) =
   );
 };
 
-export default Button;

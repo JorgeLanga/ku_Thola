@@ -1,10 +1,18 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Button from '../components/Button';
+import  {Button} from '../components/Button';
 
-const JobDetails = () => {
+type Job = {
+    title: string;
+    description: string;
+    requirements: string[];
+    location: string;
+    benefits?: string;
+};
+
+export const JobDetails = () => {
     const { jobId } = useParams();
-    const [job, setJob] = React.useState(null);
+    const [job, setJob] = React.useState<Job | null>(null);
 
     React.useEffect(() => {
         // Fetch job details from an API or data source using jobId
@@ -43,5 +51,3 @@ const JobDetails = () => {
         </div>
     );
 };
-
-export default JobDetails;

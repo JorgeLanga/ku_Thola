@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const JobsList = () => {
+export const JobsList = () => {
     const jobs = [
         {
             id: 1,
@@ -37,5 +37,3 @@ const JobsList = () => {
         </div>
     );
 };
-
-export default JobsList;

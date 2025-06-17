@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import Button from '../components/Button';
+import { useNavigate } from 'react-router-dom';
+import {Button} from '../components/Button';
 
-const FinalFeedback = () => {
+export const FinalFeedback = () => {
     const [message, setMessage] = useState('');
     const [status, setStatus] = useState(''); // 'approved' or 'rejected'
-    const history = useHistory();
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // Logic to send feedback to the candidate (e.g., API call)
         console.log('Feedback sent:', { message, status });
-        history.push('/recruiter-dashboard'); // Redirect after submission
+        navigate('/recruiter-dashboard'); // Redirect after submission
     };
 
     return (
@@ -38,10 +38,10 @@ const FinalFeedback = () => {
                         </select>
                     </label>
                 </div>
-                <Button type="submit" text="Enviar Feedback" />
+                <Button text="Enviar Feedback" onClick={function (): void {
+                    throw new Error('Function not implemented.');
+                } } />
             </form>
         </div>
     );
 };
-
-export default FinalFeedback;

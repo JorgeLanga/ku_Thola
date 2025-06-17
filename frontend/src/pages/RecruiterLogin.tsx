@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './RecruiterLogin.css'; // Assuming you have a CSS file for styling
 
-const RecruiterLogin = () => {
+export const RecruiterLogin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const history = useHistory();
+    const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
+    const handleLogin = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         // Add your authentication logic here (e.g., API call)
         try {
@@ -23,7 +23,7 @@ const RecruiterLogin = () => {
                 const data = await response.json();
                 // Store JWT token and redirect to dashboard
                 localStorage.setItem('token', data.token);
-                history.push('/recruiter-dashboard');
+                navigate('/recruiter-dashboard');
             } else {
                 // Handle login error
                 alert('Login failed. Please check your credentials.');
@@ -62,4 +62,3 @@ const RecruiterLogin = () => {
     );
 };
 
-export default RecruiterLogin;

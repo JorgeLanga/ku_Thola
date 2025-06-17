@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
-const ApplicationForm = () => {
+export const ApplicationForm = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [cv, setCv] = useState(null);
+    const [cv, setCv] = useState<File | null>(null);
     const [interest, setInterest] = useState('');
     const [coverLetter, setCoverLetter] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         // Handle form submission logic here
         console.log({
@@ -57,7 +57,13 @@ const ApplicationForm = () => {
                     <input
                         type="file"
                         accept=".pdf"
-                        onChange={(e) => setCv(e.target.files[0])}
+                        onChange={(e) => {
+                            if (e.target.files && e.target.files[0]) {
+                                setCv(e.target.files[0]);
+                            } else {
+                                setCv(null);
+                            }
+                        }}
                         required
                     />
                 </div>
@@ -84,4 +90,3 @@ const ApplicationForm = () => {
     );
 };
 
-export default ApplicationForm;

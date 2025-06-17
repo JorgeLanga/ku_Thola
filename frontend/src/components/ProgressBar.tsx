@@ -4,7 +4,7 @@ interface ProgressBarProps {
     progress: number; // Progress percentage (0 to 100)
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ progress }) => {
+export const ProgressBar: React.FC<ProgressBarProps> = ({ progress }) => {
     return (
         <div style={{ width: '100%', backgroundColor: '#F9FAFB', borderRadius: '5px', overflow: 'hidden' }}>
             <div
@@ -19,4 +19,3 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ progress }) => {
     );
 };
 
-export default ProgressBar;

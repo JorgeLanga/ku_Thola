@@ -1,7 +1,7 @@
 import React from 'react';
-import Sidebar from '../components/Sidebar';
+import {Sidebar} from '../components/Sidebar';
 
-const RecruiterDashboard: React.FC = () => {
+export const RecruiterDashboard: React.FC = () => {
     return (
         <div className="flex">
             <Sidebar />
@@ -14,4 +14,3 @@ const RecruiterDashboard: React.FC = () => {
     );
 };
 
-export default RecruiterDashboard;

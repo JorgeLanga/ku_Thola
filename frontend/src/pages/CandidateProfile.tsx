@@ -1,11 +1,25 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Button from '../components/Button';
+import {Button}  from '../components/Button';
 import './CandidateProfile.css'; // Assuming you have a CSS file for styles
 
+interface Application {
+    jobId: string;
+    jobTitle: string;
+    status: string;
+}
+
+interface Candidate {
+    name: string;
+    email: string;
+    phone: string;
+    cvUrl: string;
+    applicationHistory: Application[];
+}
+
 const CandidateProfile = () => {
-    const { candidateId } = useParams(); // Assuming you pass candidateId in the route
-    const [candidate, setCandidate] = React.useState(null);
+    const { candidateId } = useParams();
+    const [candidate, setCandidate] = React.useState<Candidate | null>(null);
     const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {

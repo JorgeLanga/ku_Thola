@@ -2,8 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '../components/Button';
 import { Sidebar } from '../components/Sidebar';
 
+type Job = {
+    id: string | number;
+    title: string;
+    description: string;
+    type: string;
+    department: string;
+    deadline: string;
+};
+
 const ManageJobs = () => {
-    const [jobs, setJobs] = useState([]);
+    const [jobs, setJobs] = useState<Job[]>([]);
     const [jobTitle, setJobTitle] = useState('');
     const [jobDescription, setJobDescription] = useState('');
     const [jobType, setJobType] = useState(''); // e.g., 'presencial' or 'virtual'
@@ -51,7 +60,7 @@ const ManageJobs = () => {
         setJobs(data);
     };
 
-    const handleDeleteJob = async (jobId) => {
+    const handleDeleteJob = async (jobId: string | number) => {
         // Replace with actual API call to delete job
         await fetch(`/api/jobs/${jobId}`, {
             method: 'DELETE',

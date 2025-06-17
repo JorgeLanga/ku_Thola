@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Home.css'; // Assuming you will create a CSS file for styling
+import  Footer from "../components/footer"
+import Header  from "../components/header"
 
-export const Home = () => {
+ export const Home = () => {
     return (
         <div className="home-container">
+            <Header/>
             <header className="home-header">
                 <h1>Ku Thola</h1>
                 <nav>
@@ -19,6 +21,9 @@ export const Home = () => {
                 <Link to="/jobs" className="button">Ver Vagas Disponíveis</Link>
                 <Link to="/recruiter-login" className="button">Sou Recrutador</Link>
             </div>
+            <Footer />
         </div>
     );
 };
+
+

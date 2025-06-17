@@ -10,7 +10,6 @@ export interface candidatureProps extends Document {
   candidateId: Types.ObjectId;
   jobId: Types.ObjectId;
   resumeUrl?: string;
-  coverLetter?: string;
   status: "recebida" |  "avaliado" | "aceite" | "entrevistado"|"rejeitado" | "contratado" |"contratado";
   history: historyProps[];
   submittedAt: Date;

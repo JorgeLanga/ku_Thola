@@ -4,7 +4,7 @@ import { userProps } from "../types/user";
 const UserSchema = new Schema<userProps>({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  passwordHash: { type: String, required: true },
+  password: { type: String, required: true },
   phone: { type: String },
   role: {
     type: String,
@@ -15,4 +15,4 @@ const UserSchema = new Schema<userProps>({
   createdAt: { type: Date, default: Date.now }
 });
 
-export const Usuario = mongoose.model<userProps>("Usuario", UserSchema);
+export const User = mongoose.model<userProps>("User", UserSchema);

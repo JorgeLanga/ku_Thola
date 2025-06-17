@@ -1,1 +1,4 @@
 # ku_Thola
+Projecto de desenvolvimento de uma aplicação com o nome "Ku_Thola"______________________________________________________________________________________
+#FUNCIONALIDADES
+

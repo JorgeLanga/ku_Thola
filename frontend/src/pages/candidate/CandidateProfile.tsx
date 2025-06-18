@@ -81,7 +81,7 @@ export const CandidateProfile = () => {
         <Button
           text="Agendar Entrevista"
           onClick={() => {
-            navigate(`/entrevistas/agendar/${candidateId}`);
+            navigate(`/rh/candidato/${candidateId}/avaliacao`);
           }}
         />
       </div>

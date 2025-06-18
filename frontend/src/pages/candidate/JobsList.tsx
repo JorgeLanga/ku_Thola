@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const JobsList = () => {
+  const navigate = useNavigate();
   const jobs = [
     {
       id: 1,
@@ -38,13 +39,13 @@ export const JobsList = () => {
             <p className="text-gray-700 mb-4">
               <strong>Data de Término:</strong> {job.expirationDate}
             </p>
-            <Link
-              to={`/vagas/${job.id}`}
-              className="inline-block text-blue-600 hover:text-blue-800 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+            <button
+              onClick={() => navigate(`/vagas/${job.id}`)}
+              className="inline-block text-[#2563EB] hover:text-white hover:bg-[#2563EB] font-medium px-4 py-2 rounded transition focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
               aria-label={`Ver detalhes da vaga: ${job.title}`}
             >
               Ver Detalhes &rarr;
-            </Link>
+            </button>
           </li>
         ))}
       </ul>

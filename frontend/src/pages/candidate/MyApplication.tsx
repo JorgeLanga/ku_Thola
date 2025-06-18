@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ProgressBar } from '../../components/ui/ProgressBar';
 
 export const MyApplication = () => {
+  const navigate = useNavigate();
+
   const applicationStatus = [
     { stage: 'Recebido', completed: true },
     { stage: 'Em Avaliação', completed: true },
@@ -21,7 +24,6 @@ export const MyApplication = () => {
       <ProgressBar progress={progressPercent} />
 
       <div className="mt-6 space-y-3 text-gray-700">
-        {/* Exemplo: poderia vir do backend, aqui só para demonstração */}
         <h2 className="text-xl font-semibold">Status atual: {currentStatus.stage}</h2>
 
         <p>
@@ -33,6 +35,14 @@ export const MyApplication = () => {
         {currentStatus.stage === 'Entrevista' && (
           <p className="font-medium text-gray-900">Data da entrevista: 15 de Outubro, 10:00 AM</p>
         )}
+
+        {/* Exemplo de botão para voltar para Home */}
+        <button
+          className="mt-6 px-4 py-2 bg-[#2563EB] text-white rounded hover:bg-[#1E3A8A] transition"
+          onClick={() => navigate('/home')}
+        >
+          Voltar para Home
+        </button>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route,} from "react-router-dom";
 import { Home } from "./pages/home"; 
 import { JobsList } from "./pages/candidate/JobsList";
 import { JobDetails } from "./pages/candidate/JobDetails";
@@ -11,6 +11,7 @@ import { CandidateProfile } from "./pages/candidate/CandidateProfile";
 import { CandidateEvaluation } from "./pages/recruiter/CandidateEvaluation";
 import { FinalFeedback } from "./pages/candidate/FinalFeedback";
 import { RHLayout } from "./layouts/rhLayout";
+import { ErrorPage } from "./pages/error-page"; 
 //import type { ReactNode } from "react";
 
 // function PrivateRoute({ children }: { children: ReactNode }) {
@@ -65,8 +66,8 @@ export function AppRoutes() {
         </Route> */}
 
         {/* FALLBACK */}
-    <Route path="*" element={<Navigate to="/home" replace />} />
-  </Routes>
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
     </BrowserRouter>
   );
 }

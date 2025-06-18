@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom"; 
-import { Link } from 'react-router-dom';
-import { Header } from '@/components/header1';
-import { Footer } from '@/components/footer1';
+//import { Link } from 'react-router-dom';
+import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
 
 export const Home = () => {
     const navigate = useNavigate();

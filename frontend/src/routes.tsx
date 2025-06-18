@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { Home } from "./pages/Home"; 
+import { Home } from "./pages/home"; 
 import { JobsList } from "./pages/candidate/JobsList";
 import { JobDetails } from "./pages/candidate/JobDetails";
 import { ApplicationForm } from "./pages/candidate/ApplicationForm";

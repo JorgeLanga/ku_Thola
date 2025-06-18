@@ -1,25 +1,33 @@
-import React from 'react';
+//import React from 'react';
 import { useNavigate } from "react-router-dom"; 
 //import { Link } from 'react-router-dom';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
+import { Header } from '@/components/header1';
+import { Footer } from '@/components/footer1';
 
 export const Home = () => {
     const navigate = useNavigate();
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900">
+    <body className="py-10 bg-[url(../img/fundo-2.jpg)] bg-black md:bg-repeat-space-y-4 bg-cover bg-center">
+      <div className="">
       <Header />
-
       {/* Hero Section */}
-      <section className="text-center py-20 px-6 bg-gradient-to-b from-white to-blue-50">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4">
+      <section className="text-center py-20 px-6 ">
+        <h2 className="text-4xl md:text-5xl text-white font-bold mb-4">
           Encontre a sua próxima oportunidade de trabalho!
         </h2>
-        <p className="text-lg text-gray-600 max-w-xl mx-auto">
+        <p className="text-lg text-cyan-500 max-w-xl mx-auto">
           Conectamos talentos a empresas de forma rápida, eficiente e digital. Seja candidato ou recrutador, comece agora mesmo.
         </p>
         <div className="flex flex-col md:flex-row justify-center gap-4 mt-10">
 
+<<<<<<< HEAD
+           <div className="flex m-4 md:gap-4">
+    
+      <button  className="bg-gradient-to-r from-cyan-500 to-cyan-900 text-white px-6 py-3 rounded-lg hover:to-blue-900 transition" onClick={() => navigate("/vagas")}>Ver Vagas Disponíveis</button>
+
+      <button  className="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-cyan-200 transition" onClick={() => navigate("/rh/login")}>Sou Recrutador</button>
+           </div>
+=======
           
     
       <button  className=" bg-white border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition" onClick={() => navigate("/vagas")}>Ver Vagas Disponíveis</button>
@@ -27,11 +35,12 @@ export const Home = () => {
      
       <button  className=" bg-white border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition" onClick={() => navigate("/rh/login")}>Sou Recrutador</button>
       
+>>>>>>> cd31208abecf9b88ad69574051d28e25945665c9
           
         </div>
       </section>
 
-      {/* Destaques ou Benefícios */}
+      {/* Destaques ou Benefícios 
       <section className="py-12 px-6 bg-white">
         <div className="max-w-5xl mx-auto grid gap-8 md:grid-cols-3 text-center">
           <div>
@@ -47,9 +56,10 @@ export const Home = () => {
             <p className="text-gray-600">Seus dados são tratados com segurança e responsabilidade.</p>
           </div>
         </div>
-      </section>
+      </section>*/}
 
       <Footer />
     </div>
+    </body>
   );
 };

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Header } from "@/components/headers"; 
-import { Footer } from "@/components/footer1";
+import { Footer } from "@/components/footer";
 
 export const Home = () => {
   const navigate = useNavigate();

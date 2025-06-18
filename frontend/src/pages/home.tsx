@@ -20,12 +20,13 @@ export const Home = () => {
         </p>
         <div className="flex flex-col md:flex-row justify-center gap-4 mt-10">
 
-           <div>
+          
     
-      <button  className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition" onClick={() => navigate("/vagas")}>Ver Vagas Disponíveis</button>
+      <button  className=" bg-white border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition" onClick={() => navigate("/vagas")}>Ver Vagas Disponíveis</button>
 
-      <button  className="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-50 transition" onClick={() => navigate("/rh/login")}>Sou Recrutador</button>
-           </div>
+     
+      <button  className=" bg-white border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition" onClick={() => navigate("/rh/login")}>Sou Recrutador</button>
+      
           
         </div>
       </section>

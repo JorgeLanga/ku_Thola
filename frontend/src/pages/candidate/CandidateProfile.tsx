@@ -79,11 +79,12 @@ export const CandidateProfile = () => {
 
       <div className="mt-8">
         <Button
-          text="Agendar Entrevista"
           onClick={() => {
             navigate(`/rh/candidato/${candidateId}/avaliacao`);
           }}
-        />
+        >
+          Agendar Entrevista
+        </Button>
       </div>
     </div>
   );

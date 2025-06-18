@@ -1,7 +1,7 @@
 
 export const Footer = () => {
   return (
-    <footer className="bg-[#1E3A8A] text-white mt-10">
+    <footer className="flex w-full bg-gradient-to-r from-cyan-500 to-cyan-900 text-white">
       <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center text-sm">
         <p>&copy; {new Date().getFullYear()} Ku Thola. Todos os direitos reservados.</p>
         <div className="mt-2 md:mt-0 space-x-4">

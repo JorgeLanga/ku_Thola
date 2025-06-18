@@ -26,7 +26,7 @@ export const JobsList = () => {
         {jobs.map((job) => (
           <li
             key={job.id}
-            className="bg-white shadow-sm rounded-lg p-6 border border-gray-200 hover:shadow-md transition-shadow"
+            className="bg-white shadow-xl/20 rounded-lg p-6 border border-gray-200 hover:shadow-md transition-shadow"
           >
             <h2 className="text-xl font-semibold text-blue-700">{job.title}</h2>
             <p className="text-gray-700 mt-1">

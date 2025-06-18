@@ -2,7 +2,9 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '../../components/ui/Button';
 import { toast } from 'react-toastify'; // Certifique-se de ter instalado react-toastify
-import type { jobProps } from '@/types/recruiterProps'; 
+import type { jobProps } from '@/types/recruiterProps';
+import { Header } from "@/components/headers"; 
+import { Footer } from "@/components/footer"; 
 
 export const JobDetails = () => {
   const { jobId } = useParams();
@@ -37,7 +39,10 @@ export const JobDetails = () => {
   }
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 bg-white shadow-md rounded-lg p-8">
+<div>
+     <Header />
+     <main>
+     <div className="max-w-3xl mx-auto mt-10 bg-white shadow-md rounded-lg p-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-4">{job.title}</h1>
       <p className="text-gray-700 mb-6">{job.description}</p>
 
@@ -73,5 +78,8 @@ export const JobDetails = () => {
         Candidatar-se
       </Button>
     </div>
+   </main>
+     <Footer />
+</div>
   );
 };

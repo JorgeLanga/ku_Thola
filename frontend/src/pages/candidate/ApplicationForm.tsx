@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Header } from "@/components/headers"; 
+import { Footer } from "@/components/footer";
+
 
 export const ApplicationForm = () => {
   const [name, setName] = useState('');
@@ -19,7 +22,10 @@ export const ApplicationForm = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg p-8">
+   <div>
+      <Header />
+    <main>
+     <div className="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg p-8">
       <h2 className="text-3xl font-semibold mb-8 text-primary-700">
         Formulário de Candidatura
       </h2>
@@ -126,5 +132,8 @@ export const ApplicationForm = () => {
         </div>
       </form>
     </div>
+    </main>
+     <Footer />
+     </div>
   );
 };

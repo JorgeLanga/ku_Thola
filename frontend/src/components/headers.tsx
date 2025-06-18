@@ -5,8 +5,13 @@ export const Header = () => {
   const location = useLocation();
 
   return (
+<<<<<<< HEAD
     <header className="bg-gradient-to-r from-cyan-500 to-cyan-900 text-white">
       <nav className="max-w-7xl mx-auto flex items-center justify-between">
+=======
+    <header className="bg-gradient-to-r from-cyan-500 to-cyan-700 text-white text-white shadow">
+      <nav className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+>>>>>>> 658406b6ec3537ac5ce919c5d2e39cd1d17af22d
         {/* Logotipo */}
         <Link to="/home" className="flex items-center gap-2 hover:opacity-90 transition">
           <img

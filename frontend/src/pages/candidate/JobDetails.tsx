@@ -1,5 +1,12 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import React from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Button } from '../../components/ui/Button';
+import { toast } from 'react-toastify'; // Certifique-se de ter instalado react-toastify
+import type { jobProps } from '@/types/recruiterProps';
+import { Header } from "@/components/headers"; 
+import { Footer } from "@/components/footer"; 
 
 export const JobDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -91,6 +98,12 @@ Oferecemos ambiente flexível, suporte contínuo e possibilidade de crescimento 
       </div>
 
       <p className="text-gray-700 mb-6 py-5">{job.description}</p>
+<div>
+     <Header />
+     <main>
+     <div className="max-w-3xl mx-auto mt-10 bg-white shadow-md rounded-lg p-8">
+      <h1 className="text-3xl font-bold text-gray-900 mb-4">{job.title}</h1>
+      <p className="text-gray-700 mb-6">{job.description}</p>
 
       <div className="mb-4">
         <h3 className="text-xl font-semibold text-gray-800">Requisitos</h3>
@@ -134,7 +147,10 @@ Oferecemos ambiente flexível, suporte contínuo e possibilidade de crescimento 
         aria-label="Candidatar-se à vaga"
       >
         Candidatar-se
-      </button>
+      </Button>
     </div>
+   </main>
+     <Footer />
+</div>
   );
 };

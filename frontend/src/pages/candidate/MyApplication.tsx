@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ProgressBar } from '../../components/ui/ProgressBar';
+import { Header } from "@/components/headers"; 
+import { Footer } from "@/components/footer";
 
 export const MyApplication = () => {
   const navigate = useNavigate();
@@ -18,7 +20,10 @@ export const MyApplication = () => {
   const progressPercent = (applicationStatus.filter(status => status.completed).length / applicationStatus.length) * 100;
 
   return (
-    <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded shadow">
+   <div>
+     <Header />
+    <main>
+       <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded shadow">
       <h1 className="text-2xl font-bold mb-6">Minha Candidatura</h1>
 
       <ProgressBar progress={progressPercent} />
@@ -45,5 +50,11 @@ export const MyApplication = () => {
         </button>
       </div>
     </div>
+    </main>
+     <div className="fixed bottom-0 left-0 w-full ">
+    <Footer />
+  </div>
+
+   </div>
   );
 };

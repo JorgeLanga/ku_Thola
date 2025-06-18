@@ -1,0 +1,17 @@
+// src/layouts/MainLayout.tsx
+import React from "react";
+import { Outlet } from "react-router-dom";
+import { Header } from "@/components/header1";
+import { Footer } from "@/components/footer1";
+
+export const MainLayout: React.FC = () => {
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main className="flex-1 px-4 py-6 bg-gray-50">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  );
+};

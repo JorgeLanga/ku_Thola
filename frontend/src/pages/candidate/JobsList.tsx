@@ -1,0 +1,53 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+export const JobsList = () => {
+  const jobs = [
+    {
+      id: 1,
+      title: 'Desenvolvedor Frontend',
+      department: 'Tecnologia',
+      type: 'Presencial',
+      expirationDate: '2023-12-31',
+    },
+    {
+      id: 2,
+      title: 'Analista de Marketing',
+      department: 'Marketing',
+      type: 'Virtual',
+      expirationDate: '2023-11-15',
+    },
+  ];
+
+  return (
+    <div className="max-w-4xl mx-auto mt-10 px-4">
+      <h1 className="text-3xl font-bold text-gray-900 mb-6">Vagas Disponíveis</h1>
+      <ul className="space-y-6">
+        {jobs.map((job) => (
+          <li
+            key={job.id}
+            className="bg-white shadow-sm rounded-lg p-6 border border-gray-200 hover:shadow-md transition-shadow"
+          >
+            <h2 className="text-xl font-semibold text-blue-700">{job.title}</h2>
+            <p className="text-gray-700 mt-1">
+              <strong>Departamento:</strong> {job.department}
+            </p>
+            <p className="text-gray-700">
+              <strong>Tipo:</strong> {job.type}
+            </p>
+            <p className="text-gray-700 mb-4">
+              <strong>Data de Término:</strong> {job.expirationDate}
+            </p>
+            <Link
+              to={`/vagas/${job.id}`}
+              className="inline-block text-blue-600 hover:text-blue-800 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+              aria-label={`Ver detalhes da vaga: ${job.title}`}
+            >
+              Ver Detalhes &rarr;
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};

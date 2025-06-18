@@ -1,23 +1,34 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './Sidebar.css'; // Assuming you have a CSS file for styling
+import { Link, useLocation } from 'react-router-dom';
 
 export const Sidebar: React.FC = () => {
-    return (
-        <div className="sidebar">
-            <h2>Dashboard</h2>
-            <ul>
-                <li>
-                    <Link to="/manage-jobs">Manage Jobs</Link>
-                </li>
-                <li>
-                    <Link to="/candidates">View Candidates</Link>
-                </li>
-                <li>
-                    <Link to="/evaluations">Evaluations</Link>
-                </li>
-            </ul>
-        </div>
-    );
-};
+  const location = useLocation();
 
+  const navItems = [
+    { path: '/manage-jobs', label: 'Gerir Vagas' },
+    { path: '/candidates', label: 'Candidatos' },
+    { path: '/evaluations', label: 'Avaliações' },
+  ];
+
+  return (
+    <aside className="w-64 min-h-screen bg-[#1E3A8A] text-white p-6">
+      <h2 className="text-2xl font-bold mb-8">Ku Thola</h2>
+      <ul className="space-y-4">
+        {navItems.map((item) => (
+          <li key={item.path}>
+            <Link
+              to={item.path}
+              className={`block px-4 py-2 rounded-lg transition-all duration-200 ${
+                location.pathname === item.path
+                  ? 'bg-[#2563EB] font-semibold'
+                  : 'hover:bg-[#2563EB]/70'
+              }`}
+            >
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  );
+};

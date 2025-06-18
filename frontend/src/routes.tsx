@@ -11,12 +11,12 @@ import { CandidateProfile } from "./pages/candidate/CandidateProfile";
 import { CandidateEvaluation } from "./pages/recruiter/CandidateEvaluation";
 import { FinalFeedback } from "./pages/candidate/FinalFeedback";
 import { RHLayout } from "./layouts/rhLayout";
-import type { ReactNode } from "react";
+//import type { ReactNode } from "react";
 
-function PrivateRoute({ children }: { children: ReactNode }) {
-  const isAuth = !!localStorage.getItem("rh_token");
-  return isAuth ? children : <Navigate to="/rh/login" replace />;
-}
+// function PrivateRoute({ children }: { children: ReactNode }) {
+//   const isAuth = !!localStorage.getItem("rh_token");
+//   return isAuth ? children : <Navigate to="/rh/login" replace />;
+// }
 
 export function AppRoutes() {
   return (
@@ -30,10 +30,22 @@ export function AppRoutes() {
         <Route path="/candidatar/:id" element={<ApplicationForm />} />
         <Route path="/minha-candidatura" element={<MyApplication />} />
 
-        {/* Login do RH */}
+           {/* Login do RH */}
         <Route path="/rh/login" element={<RecruiterLogin />} />
 
-        {/* Rotas do Recrutador/RH (privadas) */}
+        {/* Rotas do Recrutador/RH (agora públicas) */}
+        <Route path="/rh" element={<RHLayout />}>
+          <Route path="dashboard" element={<RecruiterDashboard />} />
+          <Route path="vagas" element={<ManageJobs />} />
+          <Route path="candidato/:id" element={<CandidateProfile />} />
+          <Route path="candidato/:id/avaliacao" element={<CandidateEvaluation />} />
+          <Route path="candidato/:id/feedback" element={<FinalFeedback />} />
+        </Route>
+        
+        {/* Login do RH
+        <Route path="/rh/login" element={<RecruiterLogin />} />
+
+        Rotas do Recrutador/RH (privadas)
         <Route
           path="/rh"
           element={
@@ -50,11 +62,11 @@ export function AppRoutes() {
             element={<CandidateEvaluation />}
           />
           <Route path="candidato/:id/feedback" element={<FinalFeedback />} />
-        </Route>
+        </Route> */}
 
         {/* FALLBACK */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+    <Route path="*" element={<Navigate to="/home" replace />} />
+  </Routes>
     </BrowserRouter>
   );
 }

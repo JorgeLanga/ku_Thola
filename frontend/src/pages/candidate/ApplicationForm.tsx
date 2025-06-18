@@ -50,7 +50,7 @@ export const ApplicationForm = () => {
             required
             placeholder="exemplo@dominio.com"
             className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm
-                       focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-primary-600
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-600
                        transition"
           />
         </div>
@@ -115,14 +115,15 @@ export const ApplicationForm = () => {
           />
         </div>
 
+            <div className=" flex justify-center ">
         {/** Botão Enviar */}
         <button
           type="submit"
-          className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold
-                     py-3 rounded-md shadow-md transition"
+          className=" bg-white border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition" 
         >
           Enviar Candidatura
         </button>
+        </div>
       </form>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sidebar } from '../../components/Sidebar';
+//import { Sidebar } from '../../components/Sidebar';
 import { Button } from '../../components/ui/Button';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ export const RecruiterDashboard: React.FC = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-100">
-      <Sidebar />
+      {/* <Sidebar /> */}
       <main className="flex-1 p-8">
         <h1 className="text-3xl font-bold text-gray-800">Dashboard do Recrutador</h1>
         <p className="text-gray-600 mt-2">Gerencie suas vagas e acompanhe o progresso dos candidatos.</p>
@@ -35,9 +35,9 @@ export const RecruiterDashboard: React.FC = () => {
         <div className="mt-12">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Ações Rápidas</h2>
           <div className="flex gap-4 flex-wrap">
-            <Button text="Criar Nova Vaga" onClick={() => console.log("Ir para criação de vaga")} />
-            <Button text="Ver Candidatos" onClick={() => console.log("Ir para lista de candidatos")} />
-            <Button text="Ver Avaliações" onClick={() => console.log("Ir para avaliações")} />
+            <Button text="Criar Nova Vaga" onClick={() => navigate('/rh/vagas')} />
+            <Button text="Ver Candidatos" onClick={() => navigate('/rh/dashboard')} />
+            <Button text="Ver Avaliações" onClick={() => navigate('/rh/dashboard')} />
           </div>
         </div>
       </main>

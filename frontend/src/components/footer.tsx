@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const Footer = () => (
-  <footer className="bg-[#2563EB] text-white mt-16">
-    <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-6">
+  <footer className="bg-gradient-to-r from-cyan-500 to-cyan-900 text-white">
+    <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
       <div className="flex flex-col items-center md:items-start">
         <span className="font-bold text-lg">ku_Thola</span>
         <span className="text-sm mt-1">© {new Date().getFullYear()} Todos os direitos reservados.</span>
       </div>
       <nav className="flex flex-col md:flex-row gap-4 md:gap-8 items-center">
-        <Link to="/home" className="hover:underline hover:text-gray-200 transition">Home</Link>
+        <Link to="/home" className="hover:underline hover:text-gray-200 transition">Contact</Link>
         <Link to="/vagas" className="hover:underline hover:text-gray-200 transition">Vagas</Link>
         <Link to="/minha-candidatura" className="hover:underline hover:text-gray-200 transition">Minha Candidatura</Link>
         <Link to="/rh/login" className="hover:underline hover:text-gray-200 transition">Área do Recrutador</Link>

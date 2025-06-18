@@ -5,8 +5,8 @@ export const Header = () => {
   const location = useLocation();
 
   return (
-    <header className="bg-[#2563EB] text-white shadow">
-      <nav className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+    <header className="bg-gradient-to-r from-cyan-500 to-cyan-900 text-white">
+      <nav className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logotipo */}
         <Link to="/home" className="flex items-center gap-2 hover:opacity-90 transition">
           <img

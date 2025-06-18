@@ -18,6 +18,8 @@ export const MyApplication = () => {
   const progressPercent = (applicationStatus.filter(status => status.completed).length / applicationStatus.length) * 100;
 
   return (
+    <body className="bg-black bg-[url('../img/fundo-2.jpg')] bg-cover bg-center min-h-screen flex flex-col">
+    
     <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded shadow">
       <h1 className="text-2xl font-bold mb-6">Minha Candidatura</h1>
 
@@ -45,5 +47,6 @@ export const MyApplication = () => {
         </button>
       </div>
     </div>
+    </body>
   );
 };

@@ -34,8 +34,9 @@ export const RecruiterLogin = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+    <body className="bg-black bg-[url('../img/fundo-2.jpg')] bg-cover bg-center min-h-screen flex flex-col">
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="bg-amber-50 p-8 rounded-lg shadow-2xl w-full max-w-md">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login do Recrutador</h2>
 
         <form onSubmit={handleLogin} className="space-y-4">
@@ -73,5 +74,6 @@ export const RecruiterLogin = () => {
         </form>
       </div>
     </div>
+    </body>
   );
 };

@@ -26,14 +26,14 @@ export const Home = () => {
               className="bg-gray-300 border font-semibold border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition"
               onClick={() => navigate("/vagas")}
             >
-              Ver Vagas Disponíveis
+              Vagas Disponíveis
             </button>
 
             <button
               className="bg-gray-300 border font-semibold border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition"
               onClick={() => navigate("/rh/login")}
             >
-              Sou Recrutador
+              Recrutador
             </button>
           </div>
         </section>
@@ -43,19 +43,19 @@ export const Home = () => {
           <div className="max-w-5xl mx-auto grid gap-12 md:grid-cols-3">
             <div>
               <h3 className="text-xl font-semibold text-blue-700 mb-2">Candidatura Rápida</h3>
-              <p className="text-gray-400">
+              <p className="text-white">
                 Candidate-se com poucos cliques. Simples e direto ao ponto.
               </p>
             </div>
             <div>
               <h3 className="text-xl font-semibold text-blue-700 mb-2">Gestão para Recrutadores</h3>
-              <p className="text-gray-400">
+              <p className="text-white">
                 Crie e gerencie vagas facilmente. Acompanhe candidaturas em tempo real.
               </p>
             </div>
             <div>
               <h3 className="text-xl font-semibold text-blue-700 mb-2">Plataforma Segura</h3>
-              <p className="text-gray-400">
+              <p className="text-white">
                 Seus dados são tratados com segurança e responsabilidade.
               </p>
             </div>

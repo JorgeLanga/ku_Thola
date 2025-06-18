@@ -9,8 +9,10 @@ export interface historyProps {
 }
 
 export interface candidatureProps extends Document {
-  candidateId: Types.ObjectId;
-  jobId: Types.ObjectId;
+  candidate: Types.ObjectId;
+  candidateId: string;
+  job: Types.ObjectId;
+  jobId: string;
   resumeUrl?: string;
   status: "recebida" |  "avaliado" | "aceite" | "entrevistado"|"rejeitado" | "contratado";
   history: historyProps[];

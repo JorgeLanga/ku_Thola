@@ -8,7 +8,7 @@ import { deleteCandidature } from '../controllers/candidature.controller.ts'
 
 import { authentionToken } from '../middleware/auth.Middleware.ts'
 export const candidatureRoute = Express.Router()
-candidatureRoute.post('/registar', createCandidature)
+candidatureRoute.post('/registar',authentionToken, createCandidature)
 candidatureRoute.get('/',authentionToken,getAllCandidatures)
 candidatureRoute.get('/:id',authentionToken,getCandidaturesByJob)
 candidatureRoute.delete('/:id',authentionToken,deleteCandidature)

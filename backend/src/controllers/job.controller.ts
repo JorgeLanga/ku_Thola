@@ -2,21 +2,32 @@ import { jobProps } from "../types/job";
 import { Job } from "../models/job.modes";
 import { Request, Response,NextFunction } from 'express'
 import { Candidature } from "../models/candidature.models";
+import { User } from "../models/users.models";
 
 
 export const createJob = async (req: Request, res: Response) => {
   try {
-    const body: jobProps = req.body;
-    const { title, description, requirements, createdBy,createdAt } = body;
+    
+    const body = req.body;
+    const { title, description, requirements, createdBy } = body;
+    const userId=(req as any).user.id;
+    const existingCreater=await User.findOne(createdBy)
 
-    const job = await Job.create({
+    let job ;
+    if(existingCreater?.role==="recrutador"){
+     job = await Job.create({
+      createdBy:existingCreater,
       title,
       description,
       requirements,
-      createdBy ,
-      createdAt
-    });
+      createdById:userId ,
+      status:"aberta",
+    });} else{
+       res.
+    status(500).json({message:"Não tem permissão para crair candidatura"})
+    }
 
+      
     res.status(201).json({ message: "Vaga criada com sucesso", job });
   } catch (error) {
     console.log(error);

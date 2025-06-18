@@ -8,6 +8,7 @@ import { candidatureRoute } from "./routes/candidature.route";
 import { jobRoute } from "./routes/job.route";
 import { authRoute } from "./routes/auth.route";
 import { routeEvatuation } from "./routes/evaluation.route";
+import { userProps } from "./types/user";
 
 const app = express();
 app.use(express.json());
@@ -23,6 +24,13 @@ app.use("/vagas", jobRoute);
 app.use("/login", authRoute);
 app.use("/avaliacao", routeEvatuation);
 
+declare global {
+  namespace Express {
+    interface Request {
+      user: userProps
+    }
+  }
+}
 
 mongoose
   .connect(process.env.BD_URI as string)

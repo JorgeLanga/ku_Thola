@@ -20,25 +20,15 @@ export const Home = () => {
         </p>
         <div className="flex flex-col md:flex-row justify-center gap-4 mt-10">
 
-<<<<<<< HEAD
+
            <div className="flex m-4 md:gap-4">
     
       <button  className="bg-gradient-to-r from-cyan-500 to-cyan-900 text-white px-6 py-3 rounded-lg hover:to-blue-900 transition" onClick={() => navigate("/vagas")}>Ver Vagas Disponíveis</button>
 
       <button  className="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-cyan-200 transition" onClick={() => navigate("/rh/login")}>Sou Recrutador</button>
            </div>
-=======
-          
-    
-      <button  className=" bg-white border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition" onClick={() => navigate("/vagas")}>Ver Vagas Disponíveis</button>
-
-     
-      <button  className=" bg-white border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition" onClick={() => navigate("/rh/login")}>Sou Recrutador</button>
-      
->>>>>>> cd31208abecf9b88ad69574051d28e25945665c9
-          
-        </div>
-      </section>
+            </div>
+            </section>
 
       {/* Destaques ou Benefícios 
       <section className="py-12 px-6 bg-white">

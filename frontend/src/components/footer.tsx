@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const Footer = () => (
-  <footer className="bg-gradient-to-r from-cyan-500 to-cyan-700 text-white">
-    <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-6">
+  <footer className="bg-gradient-to-r from-blue-500 to-blue-800 text-white">
+    <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-2">
       <div className="flex flex-col items-center md:items-start">
         <span className="font-bold text-lg">KU THOLA</span>
         <span className="text-sm mt-1">© {new Date().getFullYear()} Todos os direitos reservados.</span>

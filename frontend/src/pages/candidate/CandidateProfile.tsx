@@ -2,6 +2,8 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '../../components/ui/Button';
 import type { ApplicationProps, CandidateProps } from '@/types/candidateProps';
+import { Header } from "@/components/headers"; 
+import { Footer } from "@/components/footer";
 
 
 export const CandidateProfile = () => {
@@ -44,7 +46,9 @@ export const CandidateProfile = () => {
   }
 
   return (
-    <div className="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-8 mt-8">
+   <div>
+    <Header /><main>
+     <div className="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-8 mt-8">
       <h1 className="text-3xl font-semibold mb-4 text-primary-700">{candidate.name}</h1>
       <div className="mb-6 space-y-1 text-gray-700">
         <p><strong>Email:</strong> {candidate.email}</p>
@@ -86,6 +90,9 @@ export const CandidateProfile = () => {
           Agendar Entrevista
         </Button>
       </div>
+    </div>
+    </main>
+    <Footer />
     </div>
   );
 };

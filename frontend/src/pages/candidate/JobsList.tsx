@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom';
+import { Header } from "@/components/headers"; 
+import { Footer } from "@/components/footer";
 
 export const JobsList = () => {
   const navigate = useNavigate();
@@ -48,7 +50,11 @@ export const JobsList = () => {
   ];
 
   return (
-    <body className='bg-black bg-[url(../img/fundo-2.jpg)] bg-cover bg-center py-10'>
+    
+   <div>
+    <Header />
+    <main>
+    
     <div className="max-w-4xl mx-auto mt-10 px-4">
       <h1 className="text-3xl font-bold text-white mb-6 text-center">Vagas Disponíveis</h1>
       <ul className="space-y-6">
@@ -78,6 +84,9 @@ export const JobsList = () => {
         ))}
       </ul>
     </div>
-    </body>
+   </main>
+      <Footer />
+   </div>
+
   );
 };

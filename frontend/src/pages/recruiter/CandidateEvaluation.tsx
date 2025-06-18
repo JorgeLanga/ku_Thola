@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Header } from "@/components/headers"; 
+import { Footer } from "@/components/footer";
 
 export const CandidateEvaluation = () => {
   const [technicalEvaluation, setTechnicalEvaluation] = useState('');
@@ -25,7 +27,9 @@ export const CandidateEvaluation = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded shadow mt-8">
+    <div>
+         <Header /><main>
+      <div className="max-w-3xl mx-auto p-6 bg-white rounded shadow mt-8">
       <h1 className="text-2xl font-semibold mb-6">Avaliação do Candidato</h1>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
@@ -80,5 +84,8 @@ export const CandidateEvaluation = () => {
         </button>
       </form>
     </div>
+      
+      </main>
+            <Footer /></div>
   );
 };

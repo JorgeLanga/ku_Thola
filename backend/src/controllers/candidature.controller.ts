@@ -13,7 +13,7 @@ export const createCandidature = async (req: Request, res: Response) => {
       submittedAt });
 
     if (existing) {
-      return res.status(400).json({
+       res.status(400).json({
         message: "Já existe uma candidatura para esta vaga por este candidato.",
       });
     }
@@ -61,7 +61,7 @@ export const deleteCandidature = async (req: Request, res: Response) => {
     const deleted = await Candidature.findByIdAndDelete(id);
 
     if (!deleted) {
-      return res.status(404).json({ message: "Candidatura não encontrada" });
+       res.status(404).json({ message: "Candidatura não encontrada" });
     }
 
     res.status(200).json({ message: "Candidatura removida com sucesso" });

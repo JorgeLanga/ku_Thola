@@ -7,8 +7,8 @@ const JobSchema = new Schema<jobProps>({
   description: String,
   requirements: [String],
   status: { type: String, enum: ["aberta", "fechada"], default: "aberta" },
-  createdBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  createdBy: { type: Schema.Types.ObjectId, ref: "user", required: true },
   createdAt: { type: Date, default: Date.now }
 });
 
-export const Job = mongoose.model<jobProps>("Job", JobSchema);
+export const Job = mongoose.model<jobProps>("job", JobSchema);

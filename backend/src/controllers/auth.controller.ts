@@ -9,7 +9,10 @@ import { User } from '../models/users.models.ts';
 
 export const login = async (req: Request, res: Response): Promise<any> => {
   const body:userProps = req.body
-  const { email, password } = body
+  const { email, password,phone,
+      skills,
+      createdAt
+ } = body
 
   const user = await User.findOne({ email })
 
@@ -30,6 +33,10 @@ const jwtSecret: string = process.env.JWT_SECRET || '';
       id: user.id,
       name: user.name,
       email: user.email,
+      phone:user.phone,
+      skills:user.skills,
+      createdAt:user.createdAt
+
     },
    jwtSecret,
     {

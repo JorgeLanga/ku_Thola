@@ -60,11 +60,11 @@ Oferecemos ambiente flexível, suporte contínuo e possibilidade de crescimento 
   const job = jobs.find((job) => job.id === id);
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <main>
+      <main className="flex-grow">
         {!job ? (
-          <div className=" p- max-w-xl mx-auto mt-10 bg-red-50 border border-red-200 text-red-700 rounded">
+          <div className="p-6 max-w-xl mx-auto mt-10 bg-red-50 border border-red-200 text-red-700 rounded">
             <p className="text-center font-medium">
               Vaga não encontrada.
             </p>
@@ -79,7 +79,7 @@ Oferecemos ambiente flexível, suporte contínuo e possibilidade de crescimento 
             </div>
           </div>
         ) : (
-          <div className="max-w-3xl mx-auto mt-10 bg-gray-100 shadow-md rounded-lg px-4 md:px-8 py-8">
+          <div className="max-w-3xl mx-auto mt-10 bg-white shadow-md rounded-lg px-4 md:px-8 py-8">
             <h1 className="text-3xl font-bold text-[#2563EB] mb-2 py-5">{job.title}</h1>
             <div className="flex flex-wrap gap-3 mb-4 text-sm">
               <span className="bg-[#2563EB] text-white px-3 py-1 rounded">{job.type}</span>
@@ -141,6 +141,6 @@ Oferecemos ambiente flexível, suporte contínuo e possibilidade de crescimento 
         )}
       </main>
       <Footer />
-    </>
+    </div>
   );
 };

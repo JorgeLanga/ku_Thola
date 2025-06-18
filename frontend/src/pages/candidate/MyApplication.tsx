@@ -1,8 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ProgressBar } from '../../components/ui/ProgressBar';
-import { Header } from "@/components/headers"; 
-import { Footer } from "@/components/footer";
 
 export const MyApplication = () => {
   const navigate = useNavigate();

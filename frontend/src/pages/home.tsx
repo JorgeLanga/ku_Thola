@@ -13,24 +13,24 @@ export const Home = () => {
       <main className="flex-grow">
         {/* Hero Section mais espaçada */}
         <section className="text-center py-32 px-6">
-          <h2 className="text-4xl md:text-5xl text-white font-bold mb-6">
+          <h2 className="text-3xl md:text-5xl text-gray-300 font-bold mb-6">
             Encontre a sua próxima oportunidade de trabalho!
           </h2>
-          <p className="text-lg text-white max-w-xl mx-auto">
+          <p className="text-lg text-gray-300 max-w-xl mx-auto">
             Conectamos talentos a empresas de forma rápida, eficiente e digital.
             Seja candidato ou recrutador, comece agora mesmo.
           </p>
 
           <div className="flex flex-col md:flex-row justify-center gap-4 mt-12">
             <button
-              className="bg-white border font-semibold border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition"
+              className="bg-gray-300 border font-semibold border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition"
               onClick={() => navigate("/vagas")}
             >
               Ver Vagas Disponíveis
             </button>
 
             <button
-              className="bg-white border font-semibold border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition"
+              className="bg-gray-300 border font-semibold border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition"
               onClick={() => navigate("/rh/login")}
             >
               Sou Recrutador

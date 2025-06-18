@@ -5,16 +5,16 @@ export const Footer = () => (
   <footer className="bg-[#2563EB] text-white mt-16">
     <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-6">
       <div className="flex flex-col items-center md:items-start">
-        <span className="font-bold text-lg">ku_Thola</span>
+        <span className="font-bold text-lg">KU THOLA</span>
         <span className="text-sm mt-1">© {new Date().getFullYear()} Todos os direitos reservados.</span>
       </div>
-      <nav className="flex flex-col md:flex-row gap-4 md:gap-8 items-center">
+      <nav className="flex flex-col md:flex-row gap-3 md:gap-8 items-center">
         <Link to="/home" className="hover:underline hover:text-gray-200 transition">Home</Link>
         <Link to="/vagas" className="hover:underline hover:text-gray-200 transition">Vagas</Link>
         <Link to="/minha-candidatura" className="hover:underline hover:text-gray-200 transition">Minha Candidatura</Link>
         <Link to="/rh/login" className="hover:underline hover:text-gray-200 transition">Área do Recrutador</Link>
       </nav>
-      <div className="flex gap-4 mt-4 md:mt-0">
+      <div className="flex gap-4 mt-2 md:mt-0">
         <a href="mailto:contato@kuthola.com" className="hover:text-gray-200 transition" aria-label="E-mail">
           <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M2 4h20v16H2V4zm2 2v12h16V6H4zm8 5.5L4.5 6.5l1.41-1.41L12 10.09l6.09-5.01 1.41 1.41L12 11.5z"/></svg>
         </a>

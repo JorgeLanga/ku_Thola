@@ -51,11 +51,11 @@ export const JobsList = () => {
     <body className='bg-black bg-[url(../img/fundo-2.jpg)] bg-cover bg-center py-10'>
     <div className="max-w-4xl mx-auto mt-10 px-4">
       <h1 className="text-3xl font-bold text-white mb-6 text-center">Vagas Disponíveis</h1>
-      <ul className="space-y-6">
+      <ul className="space-y-8">
         {jobs.map((job) => (
           <li
             key={job.id}
-            className="bg-neutral-100 shadow-xl/20 rounded-3xl p-2 border-4"
+            className="bg-gray-100 shadow-xl/20 rounded-3xl p-4 px-6 border-4"
           >
             <h2 className="text-xl font-semibold text-blue-700">{job.title}</h2>
             <p className="text-gray-700 mt-1">

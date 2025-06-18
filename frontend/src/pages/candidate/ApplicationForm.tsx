@@ -35,7 +35,7 @@ export const ApplicationForm = () => {
             required
             placeholder="Digite seu nome completo"
             className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm
-                       focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-primary-600
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-600
                        transition"
           />
         </div>
@@ -65,7 +65,7 @@ export const ApplicationForm = () => {
             required
             placeholder="+258 8XX XXX XXX"
             className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm
-                       focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-primary-600
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-600
                        transition"
           />
         </div>
@@ -95,7 +95,7 @@ export const ApplicationForm = () => {
             required
             placeholder="Exemplo: Desenvolvimento Frontend"
             className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm
-                       focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-primary-600
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-600
                        transition"
           />
         </div>
@@ -110,8 +110,8 @@ export const ApplicationForm = () => {
             rows={5}
             placeholder="Escreva sua carta de apresentação aqui..."
             className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm
-                       focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-primary-600
-                       transition resize-none"
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-600
+                       transition"
           />
         </div>
 

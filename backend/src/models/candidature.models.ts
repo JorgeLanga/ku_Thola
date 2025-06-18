@@ -6,10 +6,9 @@ const candidatureSchema = new Schema<candidatureProps>({
   candidateId: { type: Schema.Types.ObjectId, ref: "User", required: true },
   jobId: { type: Schema.Types.ObjectId, ref: "Job", required: true },
   resumeUrl: String,
-  coverLetter: String,
   status: {
     type: String,
-    enum: ["recebida" ,  "avaliado" ,"aceite" ,"entrevistado","rejeitado" , "contratado" ,"contratado"],
+    enum: ["recebida" ,  "avaliado" ,"aceite" ,"entrevistado","rejeitado" , "contratado"],
     default: "recebida"
   },
   history: [

@@ -7,5 +7,6 @@ export interface jobProps extends Document {
   requirements: string[];   
   status: "aberta" | "fechada";  
   createdBy: Types.ObjectId;  
-  createdAt: Date;        
+  createdAt: Date;   
+       
 }

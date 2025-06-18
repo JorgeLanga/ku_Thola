@@ -55,9 +55,9 @@ export const FinalFeedback = () => {
             <option value="rejected">Não Selecionado</option>
           </select>
         </div>
-        <Button type="submit" text="Enviar Feedback" onClick={function (): void {
-                  throw new Error('Function not implemented.');
-              } } />
+        <Button type="submit">
+          Enviar Feedback
+        </Button>
       </form>
 
       {showToast && (

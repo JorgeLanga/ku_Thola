@@ -80,7 +80,7 @@ export const ManageJobs = () => {
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
       {/* <Sidebar /> */}
-      <main className="flex-grow p-4 sm:p-6 md:p-8 max-w-5xl mx-auto w-full">
+      <main className="flex-grow p-4 sm:p-6 md:p-8 max-w-5xl mx-auto w-full overflow-x-auto">
         <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Gerir Vagas</h1>
 
         <section className="mb-10 sm:mb-12 bg-white p-4 sm:p-6 rounded shadow-md">
@@ -123,10 +123,11 @@ export const ManageJobs = () => {
           </div>
           <div className="mt-4 sm:mt-6">
             <Button
-              text={loading ? 'Criando...' : 'Criar Vaga'}
               onClick={handleCreateJob}
               disabled={loading}
-            />
+            >
+              {loading ? 'Criando...' : 'Criar Vaga'}
+            </Button>
           </div>
         </section>
 
@@ -146,9 +147,10 @@ export const ManageJobs = () => {
                     <p className="text-gray-700">{job.description}</p>
                   </div>
                   <Button
-                    text="Eliminar"
                     onClick={() => handleDeleteJob(job.id)}
-                  />
+                  >
+                    Eliminar
+                  </Button>
                 </li>
               ))}
             </ul>

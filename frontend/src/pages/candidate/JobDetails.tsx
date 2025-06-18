@@ -67,10 +67,11 @@ export const JobDetails = () => {
       )}
 
       <Button
-        text="Candidatar-se"
         type="button"
         onClick={() => navigate(`/candidatar/${job.id}`)}
-      />
+      >
+        Candidatar-se
+      </Button>
     </div>
   );
 };

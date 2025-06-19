@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../../components/ui/Button';
-// import { Sidebar } from '../../components/Sidebar';
 import type { jobProps } from '@/types/recruiterProps';
 
 export const ManageJobs = () => {
   const [jobs, setJobs] = useState<jobProps[]>([]);
   const [jobTitle, setJobTitle] = useState('');
   const [jobDescription, setJobDescription] = useState('');
+  const [jobRequirements, setJobRequirements] = useState(''); // novo
   const [jobType, setJobType] = useState('');
   const [jobDepartment, setJobDepartment] = useState('');
   const [jobDeadline, setJobDeadline] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
 
   const fetchJobs = async () => {
     try {
       const response = await fetch('/api/jobs');
       if (!response.ok) throw new Error('Erro ao buscar vagas');
       const data = await response.json();
-      setJobs(data);
+      setJobs(data.jobs); // <- corrigido aqui
     } catch (error) {
       console.error(error);
     }
@@ -28,7 +31,7 @@ export const ManageJobs = () => {
   }, []);
 
   const handleCreateJob = async () => {
-    if (!jobTitle || !jobDescription || !jobType || !jobDepartment || !jobDeadline) {
+    if (!jobTitle || !jobDescription || !jobType || !jobDepartment || !jobDeadline || !jobRequirements) {
       alert('Por favor, preencha todos os campos');
       return;
     }
@@ -37,21 +40,28 @@ export const ManageJobs = () => {
     const newJob = {
       title: jobTitle,
       description: jobDescription,
+      requirements: jobRequirements.split(',').map(req => req.trim()),
       type: jobType,
       department: jobDepartment,
       deadline: jobDeadline,
+      createdBy: userId,
     };
 
     try {
       const response = await fetch('/api/jobs', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
         body: JSON.stringify(newJob),
       });
+
       if (!response.ok) throw new Error('Erro ao criar vaga');
 
       setJobTitle('');
       setJobDescription('');
+      setJobRequirements('');
       setJobType('');
       setJobDepartment('');
       setJobDeadline('');
@@ -68,7 +78,11 @@ export const ManageJobs = () => {
     if (!confirm('Tem certeza que deseja eliminar esta vaga?')) return;
 
     try {
-      const response = await fetch(`/api/jobs/${jobId}`, { method: 'DELETE' });
+      const response = await fetch(`/api/jobs/${jobId}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` },
+      });
+
       if (!response.ok) throw new Error('Erro ao eliminar vaga');
       await fetchJobs();
     } catch (error) {
@@ -79,7 +93,6 @@ export const ManageJobs = () => {
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
-      {/* <Sidebar /> */}
       <main className="flex-grow p-4 sm:p-6 md:p-8 max-w-5xl mx-auto w-full overflow-x-auto">
         <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Gerir Vagas</h1>
 
@@ -114,6 +127,12 @@ export const ManageJobs = () => {
               onChange={(e) => setJobDeadline(e.target.value)}
             />
             <textarea
+              placeholder="Requisitos (separados por vírgula)"
+              className="border border-gray-300 rounded px-3 py-2 w-full md:col-span-2"
+              value={jobRequirements}
+              onChange={(e) => setJobRequirements(e.target.value)}
+            />
+            <textarea
               placeholder="Descrição da Vaga"
               className="border border-gray-300 rounded px-3 py-2 md:col-span-2 resize-y w-full"
               rows={4}
@@ -139,7 +158,7 @@ export const ManageJobs = () => {
             <ul className="space-y-4 sm:space-y-6">
               {jobs.map((job) => (
                 <li
-                  key={job.id}
+                  key={job._id}
                   className="bg-white rounded shadow p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
                 >
                   <div className="w-full">
@@ -147,7 +166,7 @@ export const ManageJobs = () => {
                     <p className="text-gray-700">{job.description}</p>
                   </div>
                   <Button
-                    onClick={() => handleDeleteJob(job.id)}
+                    onClick={() => handleDeleteJob(job._id)}
                   >
                     Eliminar
                   </Button>

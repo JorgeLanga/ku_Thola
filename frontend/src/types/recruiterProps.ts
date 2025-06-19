@@ -1,7 +1,7 @@
 // Tipos relacionados a recrutadores e gestão de vagas
 
 export interface jobProps {
-  id: string;
+  _id: string;
   title: string;
   department: string;
   type: 'presencial' | 'virtual';

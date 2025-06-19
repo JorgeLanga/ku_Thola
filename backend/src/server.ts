@@ -16,11 +16,11 @@ app.use(cors());
 dotenv.config();
 
 const host = process.env.HOST || "http://localhost";
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3005;
 
 app.use("/users", useRoute);
 app.use("/candidatura", candidatureRoute);
-app.use("/vagas", jobRoute);
+app.use("/api/jobs", jobRoute);
 app.use("/login", authRoute);
 app.use("/avaliacao", routeEvatuation);
 

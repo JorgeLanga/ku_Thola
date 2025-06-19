@@ -8,6 +8,7 @@ export const RecruiterDashboard: React.FC = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-100 flex-col">
+      <Button onClick={() => navigate('/')}>← Voltar ao Home</Button>
       {/* <Sidebar /> */}
       <main className="flex-1 p-4 sm:p-8 w-full max-w-7xl mx-auto">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Dashboard do Recrutador</h1>

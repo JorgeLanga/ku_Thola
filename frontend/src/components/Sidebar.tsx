@@ -5,9 +5,9 @@ export const Sidebar: React.FC = () => {
   const location = useLocation();
 
   const navItems = [
-    { path: '/manage-jobs', label: 'Gerir Vagas' },
-    { path: '/candidates', label: 'Candidatos' },
-    { path: '/evaluations', label: 'Avaliações' },
+   { path: '/rh/vagas', label: 'Gerir Vagas' },
+  { path: '/rh/candidatos', label: 'Candidatos' },  // Crie essa rota se ainda não existir, ou ajuste para uma página de listagem
+  { path: '/rh/avaliacoes', label: 'Avaliações' },
   ];
 
   return (

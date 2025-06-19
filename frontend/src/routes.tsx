@@ -12,6 +12,10 @@ import { CandidateEvaluation } from "./pages/recruiter/CandidateEvaluation";
 import { FinalFeedback } from "./pages/candidate/FinalFeedback";
 import { RHLayout } from "./layouts/rhLayout";
 import { ErrorPage } from "./pages/error-page"; 
+import { CandidatesList } from "./pages/recruiter/candidatesList"; 
+import { EvaluationsList } from "./pages/recruiter/evaluactionsList.tsx"; 
+
+//...
 //import type { ReactNode } from "react";
 
 // function PrivateRoute({ children }: { children: ReactNode }) {
@@ -35,13 +39,15 @@ export function AppRoutes() {
         <Route path="/rh/login" element={<RecruiterLogin />} />
 
         {/* Rotas do Recrutador/RH (agora públicas) */}
-        <Route path="/rh" element={<RHLayout />}>
-          <Route path="dashboard" element={<RecruiterDashboard />} />
-          <Route path="vagas" element={<ManageJobs />} />
-          <Route path="candidato/:id" element={<CandidateProfile />} />
-          <Route path="candidato/:id/avaliacao" element={<CandidateEvaluation />} />
-          <Route path="candidato/:id/feedback" element={<FinalFeedback />} />
-        </Route>
+      <Route path="/rh" element={<RHLayout />}>
+  <Route path="dashboard" element={<RecruiterDashboard />} />
+  <Route path="vagas" element={<ManageJobs />} />
+  <Route path="candidatos" element={<CandidatesList />} />        {/* rota criada */}
+  <Route path="avaliacoes" element={<EvaluationsList />} />      {/* rota criada */}
+  <Route path="candidato/:id" element={<CandidateProfile />} />
+  <Route path="candidato/:id/avaliacao" element={<CandidateEvaluation />} />
+  <Route path="candidato/:id/feedback" element={<FinalFeedback />} />
+</Route>
         
         {/* Login do RH
         <Route path="/rh/login" element={<RecruiterLogin />} />

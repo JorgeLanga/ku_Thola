@@ -15,7 +15,9 @@ export const RecruiterLogin = () => {
 
     // Mock para apresentação (remova em produção!)
     if (email === 'recrutador@empresa.com' && password === '123456') {
-      localStorage.setItem('rh_token', 'mock-token');
+      localStorage.setItem('token', 'mock-token');
+      localStorage.setItem('userId', 'mock-user-id'); // simulação para teste
+
       navigate('/rh/dashboard');
       setLoading(false);
       return;
@@ -30,7 +32,8 @@ export const RecruiterLogin = () => {
 
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem('rh_token', data.token); // Salva como rh_token
+        localStorage.setItem('rh_token', data.token);
+        localStorage.setItem('userId', data.userId); // Salva como rh_token
         navigate('/rh/dashboard'); // Redireciona para dashboard RH
       } else {
         setError('Falha no login. Verifique suas credenciais.');

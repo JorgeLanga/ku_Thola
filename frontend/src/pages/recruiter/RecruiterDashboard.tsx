@@ -37,8 +37,8 @@ export const RecruiterDashboard: React.FC = () => {
           <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">Ações Rápidas</h2>
           <div className="flex flex-col sm:flex-row gap-4 flex-wrap">
             <Button onClick={() => navigate('/rh/vagas')}>Criar Nova Vaga</Button>
-            <Button onClick={() => navigate('/rh/dashboard')}>Ver Candidatos</Button>
-            <Button onClick={() => navigate('/rh/dashboard')}>Ver Avaliações</Button>
+            <Button onClick={() => navigate('/rh/candidatos')}>Ver Candidatos</Button>
+            <Button onClick={() => navigate('/rh/avaliacoes')}>Ver Avaliações</Button>
           </div>
         </div>
       </main>

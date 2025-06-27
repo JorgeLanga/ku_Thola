@@ -1,15 +1,26 @@
-import type { ProgressBarProps } from "@/types/candidateProps";
+import React from 'react';
 
-export const ProgressBar = ({ progress }: ProgressBarProps) => {
+interface ProgressBarProps {
+  progress: number; // valor entre 0 e 100
+}
+
+export const ProgressBar: React.FC<ProgressBarProps> = ({ progress }) => {
+  // Limita o valor para não ultrapassar 100%
+  const safeProgress = Math.min(Math.max(progress, 0), 100);
+
   return (
-    <div className="w-full bg-gray-200 rounded-lg h-3 relative">
+    <div
+      className="w-full h-4 bg-gray-200 rounded-full overflow-hidden"
+      role="progressbar"
+      aria-valuenow={safeProgress}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-label="Progresso da candidatura"
+    >
       <div
-        className="h-3 bg-[#2563EB] rounded-lg transition-all duration-500 ease-in-out"
-        style={{ width: `${progress}%` }}
+        className="h-full bg-primary-600 transition-all duration-700 ease-in-out"
+        style={{ width: `${safeProgress}%` }}
       />
-      <span className="absolute right-0 -top-6 text-sm font-medium text-gray-700">
-        {Math.round(progress)}%
-      </span>
     </div>
   );
 };

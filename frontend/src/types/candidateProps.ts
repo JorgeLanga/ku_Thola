@@ -1,5 +1,7 @@
 // Tipos relacionados a candidatos e candidaturas
 
+import type { Key } from "react";
+
 export interface CandidateProps {
   id: string;
   name: string;
@@ -10,6 +12,8 @@ export interface CandidateProps {
 }
 
 export interface ApplicationProps {
+  applicationDate: string | number | Date;
+  applicationId: Key | null | undefined;
   jobId: string;
   jobTitle: string;
   candidateId: string;

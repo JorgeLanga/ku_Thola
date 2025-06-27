@@ -1,13 +1,12 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Button } from '../../components/ui/Button';
-import { Header } from "@/components/headers";
-import { Footer } from "@/components/footer";
+import { Button } from "../../components/ui/Button";
 
 export const JobDetails = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
+  // Dados mock - ideal extrair para um arquivo ou API
   const jobs = [
     {
       id: "1",
@@ -61,29 +60,35 @@ Oferecemos ambiente flexível, suporte contínuo e possibilidade de crescimento 
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-grow">
+     
+      <main role="main" className="flex-grow" aria-live="polite">
         {!job ? (
-          <div className="p-6 max-w-xl mx-auto mt-10 bg-red-50 border border-red-200 text-red-700 rounded">
-            <p className="text-center font-medium">
-              Vaga não encontrada.
-            </p>
+          <section
+            className="p-6 max-w-xl mx-auto mt-10 bg-red-50 border border-red-200 text-red-700 rounded"
+            role="alert"
+          >
+            <p className="text-center font-medium">Vaga não encontrada.</p>
             <div className="text-center mt-4">
-              <button
-                aria-label="Voltar para lista de vagas"
-                className="text-[#2563EB] underline hover:text-[#1E3A8A] transition"
+              <Button
+                variant="link"
                 onClick={() => navigate("/vagas")}
+                aria-label="Voltar para lista de vagas"
               >
                 ← Voltar para lista de vagas
-              </button>
+              </Button>
             </div>
-          </div>
+          </section>
         ) : (
-          <div className="max-w-3xl mx-auto mt-10 bg-white shadow-md rounded-lg px-4 md:px-8 py-8">
-            <h1 className="text-3xl font-bold text-[#2563EB] mb-2 py-5">{job.title}</h1>
+          <article
+            className="max-w-3xl mx-auto mt-10 bg-white shadow-md rounded-lg px-4 md:px-8 py-8"
+            aria-labelledby="job-title"
+          >
+            <h1 id="job-title" className="text-3xl font-bold text-primary mb-2 py-5">
+              {job.title}
+            </h1>
             <div className="flex flex-wrap gap-3 mb-4 text-sm">
-              <span className="bg-[#2563EB] text-white px-3 py-1 rounded">{job.type}</span>
-              <span className="bg-[#1E3A8A] text-white px-3 py-1 rounded">{job.department}</span>
+              <span className="bg-primary text-white px-3 py-1 rounded">{job.type}</span>
+              <span className="bg-secondary text-white px-3 py-1 rounded">{job.department}</span>
               <span className="bg-gray-100 text-gray-800 px-3 py-1 rounded">
                 Expira em: {new Date(job.expirationDate).toLocaleDateString("pt-PT")}
               </span>
@@ -94,53 +99,61 @@ Oferecemos ambiente flexível, suporte contínuo e possibilidade de crescimento 
 
             <p className="text-gray-700 mb-6 py-5 whitespace-pre-line">{job.description}</p>
 
-            <div className="mb-4">
-              <h3 className="text-xl font-semibold text-gray-800">Requisitos</h3>
+            <section aria-labelledby="requirements-title" className="mb-4">
+              <h2 id="requirements-title" className="text-xl font-semibold text-gray-800">
+                Requisitos
+              </h2>
               <ul className="list-disc pl-6 text-gray-700 mt-2 space-y-1">
                 {job.requirements.map((req, index) => (
                   <li key={index}>{req}</li>
                 ))}
               </ul>
-            </div>
+            </section>
 
-            <div className="mb-4">
-              <h3 className="text-xl font-semibold text-gray-800">Local</h3>
+            <section aria-labelledby="location-title" className="mb-4">
+              <h2 id="location-title" className="text-xl font-semibold text-gray-800">
+                Local
+              </h2>
               <p className="text-gray-700 mt-1">{job.location}</p>
-            </div>
+            </section>
 
             {job.benefits && job.benefits.length > 0 && (
-              <div className="mb-6">
-                <h3 className="text-xl font-semibold text-gray-800">Benefícios</h3>
+              <section aria-labelledby="benefits-title" className="mb-6">
+                <h2 id="benefits-title" className="text-xl font-semibold text-gray-800">
+                  Benefícios
+                </h2>
                 <ul className="list-disc pl-6 text-gray-700 mt-2 space-y-1">
                   {job.benefits.map((benefit, index) => (
                     <li key={index}>{benefit}</li>
                   ))}
                 </ul>
-              </div>
+              </section>
             )}
 
-            <div className="mb-6">
-              <h3 className="text-xl font-semibold text-gray-800">Contato</h3>
+            <section aria-labelledby="contact-title" className="mb-6">
+              <h2 id="contact-title" className="text-xl font-semibold text-gray-800">
+                Contato
+              </h2>
               <a
                 href={`mailto:${job.contact}`}
-                className="text-[#2563EB] underline hover:text-[#1E3A8A] transition"
-                aria-label="Enviar e-mail para recrutador"
+                className="text-primary underline hover:text-primary/80 transition"
+                aria-label={`Enviar e-mail para recrutador ${job.contact}`}
               >
                 {job.contact}
               </a>
-            </div>
+            </section>
 
             <Button
-              className="mt-4 px-6 py-3 bg-[#2563EB] text-white rounded-lg font-semibold hover:bg-[#1E3A8A] transition"
+              className="mt-4"
               onClick={() => navigate(`/candidatar/${job.id}`)}
-              aria-label="Candidatar-se à vaga"
+              aria-label={`Candidatar-se à vaga ${job.title}`}
             >
               Candidatar-se
             </Button>
-          </div>
+          </article>
         )}
       </main>
-      <Footer />
+     
     </div>
   );
 };

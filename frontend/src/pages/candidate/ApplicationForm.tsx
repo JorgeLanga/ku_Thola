@@ -1,139 +1,140 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Header } from "@/components/headers"; 
-import { Footer } from "@/components/footer";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
+import { Header } from "@/components/layout/headers";
+import { Footer } from "@/components/layout/footer";
+
+import { Button } from "@/components/ui/Button";
+import { Modal } from "@/components/ui/Modal";
+import { ToastNotification } from "@/components/ui/ToastNotification";
+import { FileUpload } from "@/components/FileUpload"; 
+
+import { InputGroup } from "@/components/ui/InputGroup"; // se você já tiver, senão adaptamos rápido
 
 export const ApplicationForm = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [cv, setCv] = useState<File | null>(null);
-  const [interest, setInterest] = useState('');
-  const [coverLetter, setCoverLetter] = useState('');
+  const [interest, setInterest] = useState("");
+  const [coverLetter, setCoverLetter] = useState("");
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [toastVisible, setToastVisible] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: integrar com backend/API
+    setModalOpen(true);
+  };
+
+  const confirmSubmit = () => {
+    setModalOpen(false);
+    // Aqui você pode adicionar integração com backend/API
     console.log({ name, email, phone, cv, interest, coverLetter });
-    // Redireciona para a página de feedback do candidato
-    navigate('/minha-candidatura');
+
+    setToastVisible(true);
+
+    setTimeout(() => {
+      setToastVisible(false);
+      navigate("/minha-candidatura");
+    }, 2500);
   };
 
   return (
-   <div>
+    <div>
       <Header />
-    <main>
-     <div className="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg p-8">
-      <h2 className="text-3xl font-semibold mb-8 text-primary-700">
-        Formulário de Candidatura
-      </h2>
+      <main>
+        <div className="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg p-8">
+          <h2 className="text-3xl font-semibold mb-8 text-primary-700">
+            Formulário de Candidatura
+          </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        {/** Campo Nome */}
-        <div>
-          <label className="block text-sm font-medium text-gray-800">Nome completo</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            placeholder="Digite seu nome completo"
-            className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm
-                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-600
-                       transition"
-          />
-        </div>
+          <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+            <InputGroup
+              label="Nome completo"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Digite seu nome completo"
+              required
+            />
 
-        {/** Campo Email */}
-        <div>
-          <label className="block text-sm font-medium text-gray-800">Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder="exemplo@dominio.com"
-            className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm
-                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-600
-                       transition"
-          />
-        </div>
+            <InputGroup
+              label="Email"
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="exemplo@dominio.com"
+              required
+            />
 
-        {/** Campo Telefone */}
-        <div>
-          <label className="block text-sm font-medium text-gray-800">Telefone</label>
-          <input
-            type="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            required
-            placeholder="+258 8XX XXX XXX"
-            className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm
-                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-600
-                       transition"
-          />
-        </div>
+            <InputGroup
+              label="Telefone"
+              id="phone"
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="+258 8XX XXX XXX"
+              required
+            />
 
-        {/** Upload do CV */}
-        <div>
-          <label className="block text-sm font-medium text-gray-800">Upload do CV (PDF)</label>
-          <input
-            type="file"
-            accept=".pdf"
-            onChange={(e) =>
-              e.target.files && e.target.files[0] ? setCv(e.target.files[0]) : setCv(null)
-            }
-            required
-            className="mt-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-md
-                       cursor-pointer bg-gray-50 hover:bg-gray-100 transition"
-          />
-        </div>
+            <FileUpload
+              label="Upload do CV (PDF ou DOCX)"
+              onFileSelect={setCv}
+            />
 
-        {/** Área de Interesse */}
-        <div>
-          <label className="block text-sm font-medium text-gray-800">Área de Interesse</label>
-          <input
-            type="text"
-            value={interest}
-            onChange={(e) => setInterest(e.target.value)}
-            required
-            placeholder="Exemplo: Desenvolvimento Frontend"
-            className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm
-                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-600
-                       transition"
-          />
-        </div>
+            <InputGroup
+              label="Área de Interesse"
+              id="interest"
+              value={interest}
+              onChange={(e) => setInterest(e.target.value)}
+              placeholder="Exemplo: Desenvolvimento Frontend"
+              required
+            />
 
-        {/** Carta de Apresentação */}
-        <div>
-          <label className="block text-sm font-medium text-gray-800">Carta de Apresentação</label>
-          <textarea
-            value={coverLetter}
-            onChange={(e) => setCoverLetter(e.target.value)}
-            required
-            rows={5}
-            placeholder="Escreva sua carta de apresentação aqui..."
-            className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm
-                       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-600
-                       transition"
-          />
-        </div>
+            <InputGroup
+              label="Carta de Apresentação"
+              id="coverLetter"
+              value={coverLetter}
+              onChange={(e) => setCoverLetter(e.target.value)}
+              placeholder="Escreva sua carta de apresentação aqui..."
+              textarea
+              rows={5}
+              required
+            />
 
-            <div className=" flex justify-center ">
-        {/** Botão Enviar */}
-        <button
-          type="submit"
-          className=" bg-white border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition" 
-        >
-          Enviar Candidatura
-        </button>
+            <div className="flex justify-center">
+              <Button variant="outline" size="lg" type="submit">
+                Enviar Candidatura
+              </Button>
+            </div>
+          </form>
         </div>
-      </form>
+      </main>
+
+      <Footer />
+
+      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title="Confirmar Envio">
+        <p>Tem certeza que deseja enviar sua candidatura?</p>
+        <div className="mt-6 flex justify-end gap-3">
+          <Button variant="outline" onClick={() => setModalOpen(false)}>
+            Cancelar
+          </Button>
+          <Button variant="default" onClick={confirmSubmit}>
+            Confirmar
+          </Button>
+        </div>
+      </Modal>
+
+      {toastVisible && (
+        <ToastNotification
+          message="Candidatura enviada com sucesso!"
+          onClose={() => setToastVisible(false)}
+        />
+      )}
     </div>
-    </main>
-     <Footer />
-     </div>
   );
 };

@@ -1,25 +1,28 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Header } from "@/components/headers"; 
-import { Footer } from "@/components/footer";
 import { useJobs } from '@/context/jobsContext';
+import { Button } from '@/components/ui/Button'; // botão custom
 
 export const JobsList = () => {
   const navigate = useNavigate();
   const { jobs } = useJobs();
 
   return (
-    <div>
-      <Header />
-      <main>
-        <div className="max-w-4xl mx-auto mt-10 px-4">
-          <h1 className="text-3xl font-bold text-white mb-6 text-center">Vagas Disponíveis</h1>
-          <ul className="space-y-8">
+    <div className="min-h-screen flex flex-col bg-gray-50">
+     
+      <main role="main" className="flex-grow max-w-4xl mx-auto mt-10 px-4">
+        <h1 className="text-3xl font-bold text-center text-primary mb-8">Vagas Disponíveis</h1>
+
+        {jobs.length === 0 ? (
+          <p className="text-center text-gray-600">Nenhuma vaga disponível no momento.</p>
+        ) : (
+          <ul className="space-y-8" aria-label="Lista de vagas disponíveis">
             {jobs.map(job => (
               <li
                 key={job._id}
-                className="bg-gray-100 shadow-xl/20 rounded-3xl p-4 px-6 border-4"
+                className="bg-white shadow-md rounded-2xl p-6 border border-gray-200"
               >
-                <h2 className="text-xl font-semibold text-blue-700">{job.title}</h2>
+                <h2 className="text-xl font-semibold text-primary">{job.title}</h2>
                 <p className="text-gray-700 mt-1">
                   <strong>Departamento:</strong> {job.department}
                 </p>
@@ -27,21 +30,21 @@ export const JobsList = () => {
                   <strong>Tipo:</strong> {job.type}
                 </p>
                 <p className="text-gray-700 mb-4">
-                  <strong>Data de Término:</strong> {job.expirationDate}
+                  <strong>Data de Término:</strong>{' '}
+                  {new Date(job.expirationDate).toLocaleDateString('pt-PT')}
                 </p>
-                <button
+                <Button
                   onClick={() => navigate(`/vagas/${job._id}`)}
-                  className="inline-block text-[#2563EB] hover:text-white hover:bg-[#2563EB] font-medium px-4 py-2 rounded transition focus:outline-none focus:ring-2 focus:ring-[#2563EB]"
                   aria-label={`Ver detalhes da vaga: ${job.title}`}
                 >
                   Ver Detalhes &rarr;
-                </button>
+                </Button>
               </li>
             ))}
           </ul>
-        </div>
+        )}
       </main>
-      <Footer />
+      
     </div>
   );
 };

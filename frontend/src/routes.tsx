@@ -1,77 +1,82 @@
-import { BrowserRouter, Routes, Route,} from "react-router-dom";
-import { Home } from "./pages/home"; 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import { Home } from "./pages/home";
+import { RHLayout } from "./layouts/rhLayout";
+import { ErrorPage } from "./pages/error-page";
+import { PrivacyPolicy } from "./pages/PrivacyPolicy";
+import { TermsOfUse } from "./pages/TermsOfUse";
+
 import { JobsList } from "./pages/candidate/JobsList";
 import { JobDetails } from "./pages/candidate/JobDetails";
 import { ApplicationForm } from "./pages/candidate/ApplicationForm";
 import { MyApplication } from "./pages/candidate/MyApplication";
+import { CandidateProfile } from "./pages/candidate/CandidateProfile";
+import { FinalFeedback } from "./pages/candidate/FinalFeedback";
+import { CandidateDashboard } from "./pages/candidate/CandidateDashboard";
+import { LoginCandidate } from "./pages/candidate/LoginCandidate";
+import { RegisterCandidate } from "./pages/candidate/RegisterCandidate";
+import { InterviewSchedule } from "./pages/candidate/Candidate Interview Scheduling";
+import { CandidateNotifications } from "./pages/candidate/candidateNotification";
+import { InterviewFeedback } from "./pages/candidate/InterviewFeedback";
+
 import { RecruiterLogin } from "./pages/recruiter/RecruiterLogin";
 import { RecruiterDashboard } from "./pages/recruiter/RecruiterDashboard";
 import { ManageJobs } from "./pages/recruiter/ManageJobs";
-import { CandidateProfile } from "./pages/candidate/CandidateProfile"; 
 import { CandidateEvaluation } from "./pages/recruiter/CandidateEvaluation";
-import { FinalFeedback } from "./pages/candidate/FinalFeedback";
-import { RHLayout } from "./layouts/rhLayout";
-import { ErrorPage } from "./pages/error-page"; 
-import { CandidatesList } from "./pages/recruiter/candidatesList.tsx"; 
-import { EvaluationsList } from "./pages/recruiter/EvaluactionsList.tsx"; 
-
-//...
-//import type { ReactNode } from "react";
-
-// function PrivateRoute({ children }: { children: ReactNode }) {
-//   const isAuth = !!localStorage.getItem("rh_token");
-//   return isAuth ? children : <Navigate to="/rh/login" replace />;
-// }
+import { CandidatesList } from "./pages/recruiter/candidatesList";
+import { EvaluationsList } from "./pages/recruiter/EvaluactionsList";
+import { CandidateLayout } from "./layouts/candidate/CandidateLayout";
+import { CandidateLayoutIfAuthenticated } from "./layouts/CandidateLayoutIfAuthenticated.tsx";
 
 export function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Rotas Públicas */}
+        {/* Rotas Públicas (Sem layout) */}
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/vagas" element={<JobsList />} />
-        <Route path="/vagas/:id" element={<JobDetails />} />
-        <Route path="/candidatar/:id" element={<ApplicationForm />} />
-        <Route path="/minha-candidatura" element={<MyApplication />} />
+        <Route path="/login" element={<LoginCandidate />} />
+        <Route path="/registro" element={<RegisterCandidate />} />
 
-           {/* Login do RH */}
-        <Route path="/rh/login" element={<RecruiterLogin />} />
-
-        {/* Rotas do Recrutador/RH (agora públicas) */}
-      <Route path="/rh" element={<RHLayout />}>
-  <Route path="dashboard" element={<RecruiterDashboard />} />
-  <Route path="vagas" element={<ManageJobs />} />
-  <Route path="candidatos" element={<CandidatesList />} />       
-  <Route path="avaliacoes" element={<EvaluationsList />} />      
-  <Route path="candidato/:id" element={<CandidateProfile />} />
-  <Route path="candidato/:id/avaliacao" element={<CandidateEvaluation />} />
-  <Route path="candidato/:id/feedback" element={<FinalFeedback />} />
-</Route>
-        
-        {/* Login do RH
-        <Route path="/rh/login" element={<RecruiterLogin />} />
-
-        Rotas do Recrutador/RH (privadas)
+        {/* Vagas públicas ou autenticadas com layout */}
         <Route
-          path="/rh"
+          path="/vagas"
           element={
-            <PrivateRoute>
-              <RHLayout />
-            </PrivateRoute>
+            <CandidateLayoutIfAuthenticated>
+              <JobsList />
+            </CandidateLayoutIfAuthenticated>
           }
-        >
+        />
+        <Route path="/vagas/:id" element={<JobDetails />} />
+
+        {/* Rotas protegidas do candidato (com layout completo) */}
+        <Route path="/candidato" element={<CandidateLayout children={undefined} />}>
+          <Route path="dashboard" element={<CandidateDashboard />} />
+          <Route path="perfil" element={<CandidateProfile />} />
+          <Route path="candidatar/:id" element={<ApplicationForm />} />
+          <Route path="minha-candidatura" element={<MyApplication />} />
+          <Route path="agendar-entrevista" element={<InterviewSchedule />} />
+          <Route path="notificacoes" element={<CandidateNotifications />} />
+          <Route path="feedback/:id" element={<InterviewFeedback />} />
+        </Route>
+
+        {/* Recrutador - públicas por agora */}
+        <Route path="/rh/login" element={<RecruiterLogin />} />
+        <Route path="/rh" element={<RHLayout />}>
           <Route path="dashboard" element={<RecruiterDashboard />} />
           <Route path="vagas" element={<ManageJobs />} />
+          <Route path="candidatos" element={<CandidatesList />} />
+          <Route path="avaliacoes" element={<EvaluationsList />} />
           <Route path="candidato/:id" element={<CandidateProfile />} />
-          <Route
-            path="candidato/:id/avaliacao"
-            element={<CandidateEvaluation />}
-          />
+          <Route path="candidato/:id/avaliacao" element={<CandidateEvaluation />} />
           <Route path="candidato/:id/feedback" element={<FinalFeedback />} />
-        </Route> */}
+        </Route>
 
-        {/* FALLBACK */}
+        {/* Páginas institucionais */}
+        <Route path="/privacidade" element={<PrivacyPolicy />} />
+        <Route path="/termos" element={<TermsOfUse />} />
+
+        {/* Página de erro */}
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

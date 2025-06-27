@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Header } from "@/components/headers"; 
-import { Footer } from "@/components/footer";
+import { Header } from "@/components/layout/headers"; 
+import { Footer } from "@/components/layout/footer";
 
 export const CandidateEvaluation = () => {
   const [technicalEvaluation, setTechnicalEvaluation] = useState('');

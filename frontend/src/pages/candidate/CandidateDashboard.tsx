@@ -37,9 +37,9 @@ export const CandidateDashboard = () => {
         <h1 className="text-3xl font-bold mb-6 text-primary-700">Painel do Candidato</h1>
 
         <div className="mb-6 flex flex-wrap gap-4">
-          <Button onClick={() => navigate('/perfil-candidato')}>Editar Perfil</Button>
-          <Button onClick={() => navigate('/notificacoes')}>Notificações</Button>
-          <Button onClick={() => navigate('/agendamento-entrevista')}>Agendar Entrevista</Button>
+          <Button onClick={() => navigate('/candidato/perfil-candidato')}>Editar Perfil</Button>
+          <Button onClick={() => navigate('/candidato/')}>Notificações</Button>
+          <Button onClick={() => navigate('/candidato/agendamento-entrevista')}>Agendar Entrevista</Button>
         </div>
 
         {loading ? (

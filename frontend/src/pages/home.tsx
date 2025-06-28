@@ -64,7 +64,7 @@ export const Home = () => {
         {/* Testemunho / Social Proof */}
         <section className="py-16 px-4 text-center text-white">
           <div className="max-w-xl mx-auto bg-white/10 backdrop-blur-md rounded-lg p-6">
-            <h3 className="text-2xl font-bold mb-4">Mais de 500 candidatos já passaram por aqui!</h3>
+            <h3 className="text-2xl font-bold mb-4">Mais de 100 candidatos já passaram por aqui!</h3>
             <blockquote className="italic text-gray-200">
               “A KU THOLA me ajudou a conseguir meu primeiro estágio em menos de um mês.”
             </blockquote>

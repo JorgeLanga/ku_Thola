@@ -39,7 +39,7 @@ export const LoginCandidate = () => {
       // Simulação de login válido
       if (email === 'candidato@exemplo.com' && password === '123456') {
         // Aqui você deve salvar token/session no contexto ou localStorage
-        navigate('/dashboard-candidato'); // redireciona para dashboard
+        navigate('/candidato/dashboard'); // redireciona para dashboard
       } else {
         setError('Email ou senha incorretos.');
       }
@@ -103,7 +103,7 @@ export const LoginCandidate = () => {
           <p className="mt-6 text-center text-sm text-gray-600">
             Não tem conta?{' '}
             <Link
-              to="/registro-candidato"
+              to="/registro"
               className="text-primary-600 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               Cadastre-se aqui

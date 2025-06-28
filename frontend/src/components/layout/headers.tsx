@@ -15,7 +15,7 @@ export const Header = () => {
   const links = [
     { to: "/home", label: "Home" },
     { to: "/vagas", label: "Vagas" },
-    { to: "/dashboard", label: "Área do Candidato" }, // texto alterado aqui
+    { to: "/candidato/dashboard", label: "Área do Candidato" }, // texto alterado aqui
     { to: "/rh/login", label: "Área do Recrutador" },
   ];
 

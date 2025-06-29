@@ -6,7 +6,7 @@ import { ErrorPage } from "./pages/error-page";
 import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 import { TermsOfUse } from "./pages/TermsOfUse";
 import HelpFAQ from "./pages/candidate/Help.tsx";
-import { About } from "./pages/about.tsx";
+import { About } from "./pages/About.tsx"; 
 
 import { JobsList } from "./pages/candidate/JobsList";
 import { JobDetails } from "./pages/candidate/JobDetails";

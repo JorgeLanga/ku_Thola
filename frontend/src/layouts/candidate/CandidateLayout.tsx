@@ -1,10 +1,10 @@
 // src/layouts/CandidateLayoutWithChildren.tsx
-import type { ReactNode } from "react";
-import { useLocation } from "react-router-dom";
+//import type { ReactNode } from "react";
+import { useLocation, Outlet } from "react-router-dom";
 import { CandidateSidebar } from "./Sidebar";
 import { CandidateBreadcrumb } from "./Breadcrumb";
 
-export const CandidateLayout = ({ children }: { children: ReactNode }) => {
+const CandidateLayout = () => {
   const location = useLocation();
 
   return (
@@ -15,8 +15,12 @@ export const CandidateLayout = ({ children }: { children: ReactNode }) => {
         <header className="bg-white shadow px-6 py-4">
           <CandidateBreadcrumb path={location.pathname} />
         </header>
-        <main className="flex-1 p-6">{children}</main>
+        <main className="flex-1 p-6">
+          <Outlet />
+        </main>
       </div>
     </div>
   );
 };
+
+export default CandidateLayout;

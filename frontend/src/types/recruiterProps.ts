@@ -4,7 +4,7 @@ export interface jobProps {
   _id: string;
   title: string;
   department: string;
-  type: 'presencial' | 'virtual';
+  type: 'presencial' | 'virtual' | 'híbrido';
   expirationDate: string;
   description: string;
   requirements: string[];

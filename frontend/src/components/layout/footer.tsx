@@ -19,6 +19,10 @@ export const Footer = () => (
           <Link to="/termos" className="hover:underline hover:text-gray-100 transition">
             Termos de Uso
           </Link>
+          <span>|</span>
+          <Link to="/ajuda" className="hover:underline hover:text-gray-100 transition">
+            Ajuda/FAQ
+          </Link>
         </div>
       </div>
 

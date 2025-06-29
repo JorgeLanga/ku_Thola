@@ -1,4 +1,4 @@
-import { Schema, model, Document , Types} from "mongoose";
+import { Document , Types} from "mongoose";
 
 
 export interface jobProps extends Document {

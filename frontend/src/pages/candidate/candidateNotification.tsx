@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { BellIcon } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 interface Notification {
   id: string;
@@ -9,12 +11,11 @@ interface Notification {
 }
 
 export const CandidateNotifications = () => {
-  // Simula notificações recebidas
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
   useEffect(() => {
-    // Simulação: pegar notificações do backend
-    const fetchedNotifications: Notification[] = [
+    // Mock inicial
+    const fetched: Notification[] = [
       {
         id: "1",
         title: "Status da candidatura atualizado",
@@ -37,60 +38,71 @@ export const CandidateNotifications = () => {
         read: false,
       },
     ];
-
-    setNotifications(fetchedNotifications);
+    setNotifications(fetched);
   }, []);
 
   const markAsRead = (id: string) => {
     setNotifications((prev) =>
-      prev.map((notif) =>
-        notif.id === id ? { ...notif, read: true } : notif
-      )
+      prev.map((n) => (n.id === id ? { ...n, read: true } : n))
     );
+  };
+
+  const markAllAsRead = () => {
+    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      
       <main className="flex-grow max-w-3xl mx-auto p-6 bg-white rounded shadow mt-10">
-        <h1 className="text-2xl font-bold mb-6 text-gray-800">Notificações</h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+            <BellIcon className="w-6 h-6 text-blue-600" />
+            Notificações
+          </h1>
+          {notifications.some((n) => !n.read) && (
+            <Button variant="outline" onClick={markAllAsRead}>
+              Marcar todas como lidas
+            </Button>
+          )}
+        </div>
 
-        {notifications.length === 0 && (
+        {notifications.length === 0 ? (
           <p className="text-gray-600">Nenhuma notificação no momento.</p>
+        ) : (
+          <ul className="space-y-4">
+            {notifications.map(({ id, title, message, date, read }) => (
+              <li
+                key={id}
+                className={`p-4 border rounded-md transition ${
+                  read ? "bg-gray-100" : "bg-blue-50 border-blue-400"
+                }`}
+              >
+                <article className="flex justify-between items-start">
+                  <div>
+                    <h3 className="font-semibold text-gray-800">{title}</h3>
+                    <p className="text-gray-700 mt-1">{message}</p>
+                    <p className="text-xs text-gray-500 mt-2">
+                      {new Date(date).toLocaleString("pt-PT", {
+                        dateStyle: "short",
+                        timeStyle: "short",
+                      })}
+                    </p>
+                  </div>
+                  {!read && (
+                    <button
+                      onClick={() => markAsRead(id)}
+                      className="text-sm text-blue-600 hover:underline focus:outline-none"
+                      aria-label={`Marcar notificação "${title}" como lida`}
+                    >
+                      Marcar como lida
+                    </button>
+                  )}
+                </article>
+              </li>
+            ))}
+          </ul>
         )}
-
-        <ul className="space-y-4">
-          {notifications.map(({ id, title, message, date, read }) => (
-            <li
-              key={id}
-              className={`p-4 border rounded-md ${
-                read ? "bg-gray-100" : "bg-blue-50 border-blue-400"
-              }`}
-            >
-              <div className="flex justify-between items-center mb-1">
-                <h3 className="font-semibold text-gray-800">{title}</h3>
-                {!read && (
-                  <button
-                    onClick={() => markAsRead(id)}
-                    className="text-sm text-blue-600 hover:underline focus:outline-none"
-                    aria-label={`Marcar notificação "${title}" como lida`}
-                  >
-                    Marcar como lida
-                  </button>
-                )}
-              </div>
-              <p className="text-gray-700">{message}</p>
-              <p className="text-xs text-gray-500 mt-2">
-                {new Date(date).toLocaleString("pt-PT", {
-                  dateStyle: "short",
-                  timeStyle: "short",
-                })}
-              </p>
-            </li>
-          ))}
-        </ul>
       </main>
-    
     </div>
   );
 };

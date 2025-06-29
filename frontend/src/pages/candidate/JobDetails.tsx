@@ -71,7 +71,7 @@ Oferecemos ambiente flexível, suporte contínuo e possibilidade de crescimento 
             <div className="text-center mt-4">
               <Button
                 variant="link"
-                onClick={() => navigate("/vagas")}
+                onClick={() => navigate('/candidato/vagas')}
                 aria-label="Voltar para lista de vagas"
               >
                 ← Voltar para lista de vagas
@@ -145,7 +145,7 @@ Oferecemos ambiente flexível, suporte contínuo e possibilidade de crescimento 
 
             <Button
               className="mt-4"
-              onClick={() => navigate(`/candidatar/${job.id}`)}
+              onClick={() => navigate(`/candidato/candidatar/${job.id}`)}
               aria-label={`Candidatar-se à vaga ${job.title}`}
             >
               Candidatar-se

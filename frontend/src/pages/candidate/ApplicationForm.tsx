@@ -1,50 +1,144 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Header } from "@/components/layout/headers";
-import { Footer } from "@/components/layout/footer";
-
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
 import { ToastNotification } from "@/components/ui/ToastNotification";
-import { FileUpload } from "@/components/FileUpload"; 
+import { FileUpload } from "@/components/FileUpload";
+import { InputGroup } from "@/components/ui/InputGroup";
 
-import { InputGroup } from "@/components/ui/InputGroup"; // se você já tiver, senão adaptamos rápido
+import * as pdfjsLib from "pdfjs-dist";
+import pdfjsWorker from "pdfjs-dist/build/pdf.worker?url";
+import mammoth from "mammoth";
+
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 export const ApplicationForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [cv, setCv] = useState<File | null>(null);
-  const [interest, setInterest] = useState("");
+  const [cvText, setCvText] = useState<string>("");
   const [coverLetter, setCoverLetter] = useState("");
+  const [showCoverLetter, setShowCoverLetter] = useState(false);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [toastVisible, setToastVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [loadingTextExtraction, setLoadingTextExtraction] = useState(false);
 
   const navigate = useNavigate();
 
+  const extractTextFromPDF = async (file: File): Promise<string> => {
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    let fullText = "";
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      const pageText = content.items.map((item: unknown) => (item as { str: string }).str).join(" ");
+      fullText += pageText + "\n";
+    }
+    return fullText;
+  };
+
+  const extractTextFromDocx = async (file: File): Promise<string> => {
+    const arrayBuffer = await file.arrayBuffer();
+    const result = await mammoth.extractRawText({ arrayBuffer });
+    return result.value;
+  };
+
+  const extractBasicInfo = (text: string) => {
+    const emailMatch = text.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}/i);
+    const phoneMatch = text.match(/(\+258\s?)?8\d{2}\s?\d{3}\s?\d{3}/);
+    const lines = text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+
+    let probableName = "";
+    for (const line of lines) {
+      if (!line.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}/i) && !line.match(/(\+258\s?)?8\d{2}\s?\d{3}\s?\d{3}/) && line.length > 3) {
+        probableName = line;
+        break;
+      }
+    }
+
+    return {
+      name: probableName,
+      email: emailMatch?.[0] || "",
+      phone: phoneMatch?.[0] || "",
+    };
+  };
+
+  const handleFileSelect = async (file: File | null) => {
+    setCv(file);
+    setCvText("");
+    if (!file) return;
+
+    const validTypes = ["application/pdf", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
+    if (!validTypes.includes(file.type)) {
+      alert("Por favor, envie um arquivo PDF ou DOCX.");
+      setCv(null);
+      return;
+    }
+
+    try {
+      setLoadingTextExtraction(true);
+      let extractedText = "";
+      if (file.type === "application/pdf") {
+        extractedText = await extractTextFromPDF(file);
+      } else {
+        extractedText = await extractTextFromDocx(file);
+      }
+
+      setCvText(extractedText);
+
+      const info = extractBasicInfo(extractedText);
+      if (!name && info.name) setName(info.name);
+      if (!email && info.email) setEmail(info.email);
+      if (!phone && info.phone) setPhone(info.phone);
+
+    } catch (error) {
+      console.error("Erro ao extrair texto:", error);
+      alert("Falha ao extrair texto do CV.");
+      setCvText("");
+    } finally {
+      setLoadingTextExtraction(false);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!name || !email || !phone || !cv) {
+      alert("Preencha todos os campos obrigatórios.");
+      return;
+    }
     setModalOpen(true);
   };
 
   const confirmSubmit = () => {
     setModalOpen(false);
-    // Aqui você pode adicionar integração com backend/API
-    console.log({ name, email, phone, cv, interest, coverLetter });
+    setIsSubmitting(true);
+
+    console.log({ name, email, phone, cv, cvText, coverLetter });
 
     setToastVisible(true);
 
     setTimeout(() => {
       setToastVisible(false);
-      navigate("/minha-candidatura");
+      setIsSubmitting(false);
+      navigate("/candidato/minha-candidatura");
+
+      setName("");
+      setEmail("");
+      setPhone("");
+      setCv(null);
+      setCvText("");
+      setCoverLetter("");
+      setShowCoverLetter(false);
     }, 2500);
   };
 
   return (
     <div>
-      <Header />
       <main>
         <div className="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg p-8">
           <h2 className="text-3xl font-semibold mb-8 text-primary-700">
@@ -60,7 +154,6 @@ export const ApplicationForm = () => {
               placeholder="Digite seu nome completo"
               required
             />
-
             <InputGroup
               label="Email"
               id="email"
@@ -70,7 +163,6 @@ export const ApplicationForm = () => {
               placeholder="exemplo@dominio.com"
               required
             />
-
             <InputGroup
               label="Telefone"
               id="phone"
@@ -80,42 +172,52 @@ export const ApplicationForm = () => {
               placeholder="+258 8XX XXX XXX"
               required
             />
-
             <FileUpload
               label="Upload do CV (PDF ou DOCX)"
-              onFileSelect={setCv}
+              onFileSelect={handleFileSelect}
             />
 
-            <InputGroup
-              label="Área de Interesse"
-              id="interest"
-              value={interest}
-              onChange={(e) => setInterest(e.target.value)}
-              placeholder="Exemplo: Desenvolvimento Frontend"
-              required
-            />
+            {loadingTextExtraction ? (
+              <p className="text-gray-600 mt-2">Extraindo texto do CV...</p>
+            ) : cvText ? (
+              <div className="mt-4 p-4 border rounded bg-gray-50 max-h-48 overflow-auto whitespace-pre-wrap text-sm text-gray-700">
+                <h3 className="font-semibold mb-2">Texto extraído do CV (para revisão):</h3>
+                <pre>{cvText}</pre>
+              </div>
+            ) : null}
 
-            <InputGroup
-              label="Carta de Apresentação"
-              id="coverLetter"
-              value={coverLetter}
-              onChange={(e) => setCoverLetter(e.target.value)}
-              placeholder="Escreva sua carta de apresentação aqui..."
-              textarea
-              rows={5}
-              required
-            />
+            {!showCoverLetter && (
+              <div className="text-right">
+                <button
+                  type="button"
+                  className="text-sm text-blue-600 hover:underline"
+                  onClick={() => setShowCoverLetter(true)}
+                >
+                  + Incluir carta de apresentação
+                </button>
+              </div>
+            )}
+
+            {showCoverLetter && (
+              <InputGroup
+                label="Carta de Apresentação (opcional)"
+                id="coverLetter"
+                value={coverLetter}
+                onChange={(e) => setCoverLetter(e.target.value)}
+                placeholder="Fale brevemente sobre sua motivação..."
+                textarea
+                rows={5}
+              />
+            )}
 
             <div className="flex justify-center">
-              <Button variant="outline" size="lg" type="submit">
-                Enviar Candidatura
+              <Button variant="outline" size="lg" type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Enviando..." : "Enviar Candidatura"}
               </Button>
             </div>
           </form>
         </div>
       </main>
-
-      <Footer />
 
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title="Confirmar Envio">
         <p>Tem certeza que deseja enviar sua candidatura?</p>
@@ -130,10 +232,7 @@ export const ApplicationForm = () => {
       </Modal>
 
       {toastVisible && (
-        <ToastNotification
-          message="Candidatura enviada com sucesso!"
-          onClose={() => setToastVisible(false)}
-        />
+        <ToastNotification message="Candidatura enviada com sucesso!" onClose={() => setToastVisible(false)} />
       )}
     </div>
   );

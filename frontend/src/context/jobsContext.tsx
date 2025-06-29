@@ -17,7 +17,7 @@ const initialJobs: jobProps[] = [
     title: 'Desenvolvedor Frontend',
     department: 'Tecnologia',
     type: 'presencial',
-    expirationDate: '2023-12-31',
+    expirationDate: '2025-12-31',
     description: 'Desenvolvimento de interfaces modernas.',
     requirements: ['React', 'Tailwind CSS', 'JavaScript'],
     location: 'Maputo',
@@ -33,6 +33,29 @@ const initialJobs: jobProps[] = [
     requirements: ['Google Ads', 'SEO', 'Social Media'],
     location: 'Remoto',
     benefits: ['Horário flexível'],
+  },
+  // Novas vagas adicionadas com datas atuais (2025)
+  {
+    _id: '3',
+    title: 'Engenheiro Civil',
+    department: 'Construção Civil',
+    type: 'presencial',
+    expirationDate: '2024-07-31',
+    description: 'Gerenciamento de obras e projetos rodoviários.',
+    requirements: ['AutoCAD', 'MS Project', 'Experiência em fiscalização'],
+    location: 'Maputo',
+    benefits: ['Assistência médica', 'Vale transporte'],
+  },
+  {
+    _id: '4',
+    title: 'Especialista em Suporte Técnico',
+    department: 'TI',
+    type: 'híbrido',
+    expirationDate: '2025-08-15',
+    description: 'Suporte técnico e manutenção de sistemas internos.',
+    requirements: ['Conhecimento em redes', 'Windows/Linux', 'Atendimento ao cliente'],
+    location: 'Maputo',
+    benefits: ['Vale alimentação', 'Home office parcial'],
   },
 ];
 

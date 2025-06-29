@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/Button";
-
 import { ApplicationCard } from "@/components/cards/ApplicationCard";
 
 type ApplicationProps = {
@@ -25,6 +24,7 @@ const SkeletonCard = () => (
 
 export const CandidateProfile = () => {
   const { candidateId } = useParams<{ candidateId: string }>();
+  
   const navigate = useNavigate();
 
   const [candidate, setCandidate] = useState<CandidateProps | null>(null);
@@ -34,16 +34,39 @@ export const CandidateProfile = () => {
   const fetchCandidate = async () => {
     setLoading(true);
     setError(null);
+
     try {
-      const response = await fetch(`/api/candidates/${candidateId}`);
-      if (!response.ok) throw new Error("Falha ao carregar dados do candidato");
-      const data: CandidateProps = await response.json();
+      // ⚠️ Substitua este bloco por fetch real quando backend estiver pronto
+      // const response = await fetch(`/api/candidates/${candidateId}`);
+      // if (!response.ok) throw new Error("Falha ao carregar dados do candidato");
+      // const data: CandidateProps = await response.json();
+
+      // MOCK TEMPORÁRIO para testes sem backend
+      const data: CandidateProps = {
+        name: "Domingos Timane",
+        email: "domingos.timane@email.com",
+        phone: "+258 84 000 0000",
+        cvUrl: "https://example.com/cv.pdf",
+        applications: [
+          {
+            jobId: "123",
+            jobTitle: "Engenheiro Civil",
+            status: "Entrevista marcada",
+          },
+          {
+            jobId: "456",
+            jobTitle: "Analista de Dados",
+            status: "Rejeitado",
+          },
+        ],
+      };
+
       setCandidate(data);
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
       } else {
-        setError("Erro desconhecido");
+        setError("Erro desconhecido ao buscar candidato.");
       }
       setCandidate(null);
     } finally {
@@ -58,9 +81,9 @@ export const CandidateProfile = () => {
   }, [candidateId]);
 
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50 py-10 px-4">
       <main>
-        <div className="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-8 mt-8">
+        <div className="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-8">
           {loading ? (
             <>
               <SkeletonCard />
@@ -76,7 +99,9 @@ export const CandidateProfile = () => {
             </div>
           ) : candidate ? (
             <>
-              <h1 className="text-3xl font-semibold mb-4 text-primary-700">{candidate.name}</h1>
+              <h1 className="text-3xl font-semibold mb-4 text-primary-700">
+                {candidate.name}
+              </h1>
               <div className="mb-6 space-y-1 text-gray-700">
                 <p>
                   <strong>Email:</strong> {candidate.email}
@@ -99,13 +124,20 @@ export const CandidateProfile = () => {
               </div>
 
               <section>
-                <h2 className="text-2xl font-semibold mb-4 text-gray-800">Histórico de Candidaturas</h2>
+                <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+                  Histórico de Candidaturas
+                </h2>
                 {candidate.applications.length === 0 ? (
-                  <p className="text-gray-500 italic">Nenhuma candidatura encontrada.</p>
+                  <p className="text-gray-500 italic">
+                    Nenhuma candidatura encontrada.
+                  </p>
                 ) : (
                   <ul className="space-y-3">
                     {candidate.applications.map((application) => (
-                      <ApplicationCard key={application.jobId} application={application} />
+                      <ApplicationCard
+                        key={application.jobId}
+                        application={application}
+                      />
                     ))}
                   </ul>
                 )}
@@ -114,20 +146,19 @@ export const CandidateProfile = () => {
               <div className="mt-8">
                 <Button
                   aria-label={`Agendar entrevista para ${candidate.name}`}
-                  onClick={() => {
-                    navigate(`/rh/candidato/${candidateId}/avaliacao`);
-                  }}
+                  onClick={() => navigate(`/rh/candidato/${candidateId}/avaliacao`)}
                 >
                   Agendar Entrevista
                 </Button>
               </div>
             </>
           ) : (
-            <div className="text-center text-red-600 font-semibold mt-10">Candidato não encontrado.</div>
+            <div className="text-center text-red-600 font-semibold mt-10">
+              Candidato não encontrado.
+            </div>
           )}
         </div>
       </main>
-      
     </div>
   );
 };

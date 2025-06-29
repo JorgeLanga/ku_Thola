@@ -5,6 +5,8 @@ import { RHLayout } from "./layouts/rhLayout";
 import { ErrorPage } from "./pages/error-page";
 import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 import { TermsOfUse } from "./pages/TermsOfUse";
+import HelpFAQ from "./pages/candidate/Help.tsx";
+import { About } from "./pages/about.tsx";
 
 import { JobsList } from "./pages/candidate/JobsList";
 import { JobDetails } from "./pages/candidate/JobDetails";
@@ -15,7 +17,6 @@ import { FinalFeedback } from "./pages/candidate/FinalFeedback";
 import { CandidateDashboard } from "./pages/candidate/CandidateDashboard";
 import { LoginCandidate } from "./pages/candidate/LoginCandidate";
 import { RegisterCandidate } from "./pages/candidate/RegisterCandidate";
-import { InterviewSchedule } from "./pages/candidate/Candidate Interview Scheduling";
 import { CandidateNotifications } from "./pages/candidate/candidateNotification";
 import { InterviewFeedback } from "./pages/candidate/InterviewFeedback";
 
@@ -25,8 +26,11 @@ import { ManageJobs } from "./pages/recruiter/ManageJobs";
 import { CandidateEvaluation } from "./pages/recruiter/CandidateEvaluation";
 import { CandidatesList } from "./pages/recruiter/candidatesList";
 import { EvaluationsList } from "./pages/recruiter/EvaluactionsList";
-import { CandidateLayout } from "./layouts/candidate/CandidateLayout";
-import { CandidateLayoutIfAuthenticated } from "./layouts/CandidateLayoutIfAuthenticated.tsx";
+import  CandidateLayout  from "./layouts/candidate/CandidateLayout";
+//import { CandidateLayoutIfAuthenticated } from "./layouts/CandidateLayoutIfAuthenticated.tsx";
+import { DashboardCandidaturas } from "./pages/candidate/DashboardCandidaturas.tsx";
+import { DashboardEntrevistas } from "./pages/candidate/DashboardEntrevistas.tsx";
+
 
 export function AppRoutes() {
   return (
@@ -35,27 +39,23 @@ export function AppRoutes() {
         {/* Rotas Públicas (Sem layout) */}
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/ajuda" element={<HelpFAQ/>} />
         <Route path="/login" element={<LoginCandidate />} />
         <Route path="/registro" element={<RegisterCandidate />} />
 
-        {/* Vagas públicas ou autenticadas com layout */}
-        <Route
-          path="/vagas"
-          element={
-            <CandidateLayoutIfAuthenticated>
-              <JobsList />
-            </CandidateLayoutIfAuthenticated>
-          }
-        />
-        <Route path="/vagas/:id" element={<JobDetails />} />
+       {/* Rotas protegidas do candidato (com layout completo) */}
+      
+        <Route path="/candidato" element={<CandidateLayout />}>
+          <Route path="vagas"element={ <JobsList />}/>
+          <Route path="vagas/:id" element={<JobDetails />} />
 
-        {/* Rotas protegidas do candidato (com layout completo) */}
-        <Route path="/candidato" element={<CandidateLayout children={undefined} />}>
           <Route path="dashboard" element={<CandidateDashboard />} />
+          <Route path="minhas-candidaturas" element={<DashboardCandidaturas />} />
+          <Route path="entrevistas" element={<DashboardEntrevistas />} />
           <Route path="perfil" element={<CandidateProfile />} />
           <Route path="candidatar/:id" element={<ApplicationForm />} />
           <Route path="minha-candidatura" element={<MyApplication />} />
-          <Route path="agendar-entrevista" element={<InterviewSchedule />} />
           <Route path="notificacoes" element={<CandidateNotifications />} />
           <Route path="feedback/:id" element={<InterviewFeedback />} />
         </Route>

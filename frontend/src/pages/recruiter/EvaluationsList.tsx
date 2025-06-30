@@ -1,14 +1,17 @@
 import React from "react";
-import { useJobs } from "@/context/jobsContext";
+import { useNavigate } from "react-router-dom";
+import { useJobs } from '@/context/jobsContext';
+import { StatusBadge } from '@/components/ui/StatusBadge';
 
 interface Evaluation {
   candidateName: string;
   email: string;
   jobId: string;
-  status: string;
+  status: "Aprovado" | "Não selecionado";
   technical: string;
   behavioral: string;
 }
+
 
 const mockEvaluations: Evaluation[] = [
   {
@@ -38,6 +41,7 @@ const mockEvaluations: Evaluation[] = [
 ];
 
 export const EvaluationsList = () => {
+  const navigate = useNavigate();
   const { jobs } = useJobs();
 
   const getJobTitle = (jobId: string) => {
@@ -61,20 +65,24 @@ export const EvaluationsList = () => {
             </tr>
           </thead>
           <tbody>
-            {mockEvaluations.map((evalItem, index) => (
-              <tr key={index} className="border-b hover:bg-gray-50">
-                <td className="px-4 py-2 font-medium">{evalItem.candidateName}</td>
+            {mockEvaluations.map((evalItem, idx) => (
+              <tr
+                key={idx}
+                className="border-b hover:bg-gray-50 cursor-pointer"
+                onClick={() => navigate(`/rh/candidato/${idx}`)}
+                tabIndex={0}
+                onKeyDown={(e) => e.key === 'Enter' && navigate(`/rh/candidato/${idx}`)}
+              >
+                <td className="px-4 py-2 font-medium text-gray-800">{evalItem.candidateName}</td>
                 <td className="px-4 py-2 text-blue-600 underline">{evalItem.email}</td>
                 <td className="px-4 py-2">{getJobTitle(evalItem.jobId)}</td>
-                <td
-                  className={`px-4 py-2 font-semibold ${
-                    evalItem.status === "Aprovado" ? "text-green-600" : "text-red-500"
-                  }`}
-                >
-                  {evalItem.status}
+                <td className="px-4 py-2">
+                  <StatusBadge
+                    status={evalItem.status === "Aprovado" ? "approved" : "rejected"}
+                  />
                 </td>
-                <td className="px-4 py-2 text-sm">{evalItem.technical}</td>
-                <td className="px-4 py-2 text-sm">{evalItem.behavioral}</td>
+                <td className="px-4 py-2 text-sm text-gray-700">{evalItem.technical}</td>
+                <td className="px-4 py-2 text-sm text-gray-700">{evalItem.behavioral}</td>
               </tr>
             ))}
           </tbody>

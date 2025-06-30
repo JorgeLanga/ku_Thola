@@ -6,6 +6,8 @@ type InputGroupProps = {
   id: string;
   type?: string;
   value: string;
+  min?: number;
+  max?: number;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   placeholder?: string;
   required?: boolean;
@@ -19,6 +21,8 @@ export const InputGroup: React.FC<InputGroupProps> = ({
   type = "text",
   value,
   onChange,
+  min,
+  max,
   placeholder,
   required = false,
   textarea = false,
@@ -47,6 +51,8 @@ export const InputGroup: React.FC<InputGroupProps> = ({
           onChange={onChange}
           placeholder={placeholder}
           required={required}
+          {...(min !== undefined ? { min } : {})}
+          {...(max !== undefined ? { max } : {})}
           className="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-600 transition"
         />
       )}
